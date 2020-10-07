@@ -2,19 +2,12 @@ import React from 'react'
 import MapContainer from './MapContainer'
 import TripForm from '../Components/TripForm'
 import TripContainer from './TripContainer'
-import Geocode from 'react-geocode';
 
 
 class Dashboard extends React.Component {
 
     state = {
         tripsArray: []
-    }
-
-    componentDidMount() {
-        fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/trips`)
-            .then(resp => resp.json())
-            .then(trips => this.setState(() => ({ tripsArray: trips })))
     }
 
     tripSubmitHandler = (trip) => {
@@ -28,8 +21,9 @@ class Dashboard extends React.Component {
         let options = {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 'Content-type': 'application/json',
-                'Accepts': 'application/json'
+                'Accepts': 'application/json',
             },
             body: JSON.stringify(tripObj)
         }
@@ -44,7 +38,7 @@ class Dashboard extends React.Component {
             <div id="dashboard" >
                 <MapContainer user={this.props.user} trips={this.state.tripsArray} />
                 <TripForm tripSubmitHandler={this.tripSubmitHandler} />
-                <TripContainer trips={this.state.tripsArray} />
+                <TripContainer user={this.props.user} trips={this.state.tripsArray} />
             </div>
         )
     }

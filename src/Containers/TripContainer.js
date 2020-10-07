@@ -14,7 +14,8 @@ class TripContainer extends React.Component {
     }
 
     componentDidUpdate(pP, pS) {
-        if (pP.trips !== this.props.trips) {
+        let tripsArray = this.props.user.my_trips.concat(this.props.trips)
+        if (pP.trips !== this.props.trips || pP.user.my_trips !== this.props.user.my_trips) {
             let nA = []
             let sA = []
             let eU = []
@@ -22,28 +23,28 @@ class TripContainer extends React.Component {
             let aF = []
             let aU = []
             let aN = []
-            for (let i = 0; i < this.props.trips.length; i++) {
-                switch (this.props.trips[i].continent) {
+            for (let i = 0; i < tripsArray.length; i++) {
+                switch (tripsArray[i].continent) {
                     case ('North America'):
-                        nA.push(this.props.trips[i])
+                        nA.push(tripsArray[i])
                         break
                     case ('South America'):
-                        sA.push(this.props.trips[i])
+                        sA.push(tripsArray[i])
                         break
                     case ('Europe'):
-                        eU.push(this.props.trips[i])
+                        eU.push(tripsArray[i])
                         break
                     case ('Asia'):
-                        aS.push(this.props.trips[i])
+                        aS.push(tripsArray[i])
                         break
                     case ('Africa'):
-                        aF.push(this.props.trips[i])
+                        aF.push(tripsArray[i])
                         break
                     case ('Australia'):
-                        aU.push(this.props.trips[i])
+                        aU.push(tripsArray[i])
                         break
                     case ('Antarctica'):
-                        aN.push(this.props.trips[i])
+                        aN.push(tripsArray[i])
                         break
                     default:
                         console.log('nothing')

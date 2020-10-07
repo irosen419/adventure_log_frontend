@@ -9,8 +9,9 @@ class MapContainer extends React.Component {
     }
 
     componentDidMount() {
-        for (let i = 0; i < this.props.trips.length; i++) {
-            this.geocode(this.props.trips[i].destination)
+        let tripsArray = this.props.user.my_trips.concat(this.props.trips)
+        for (let i = 0; i < tripsArray.length; i++) {
+            this.geocode(tripsArray[i].destination)
         }
     }
 
@@ -37,6 +38,7 @@ class MapContainer extends React.Component {
     }
 
     mapStores = () => {
+        console.log(this.state.coordinatesArray)
         return this.state.coordinatesArray.map(coord => <Marker position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => console.log("Clicked! ", coord.longitude)} />)
     }
 
