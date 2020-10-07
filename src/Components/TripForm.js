@@ -3,8 +3,8 @@ import React from 'react'
 class TripForm extends React.Component {
 
     state = {
-        date: "",
-        location: "",
+        travel_date: "",
+        destination: "",
         continent: ""
     }
 
@@ -13,20 +13,25 @@ class TripForm extends React.Component {
         this.setState(() => ({ [e.target.name]: e.target.value }))
     }
 
+    submitHandler = (e) => {
+        e.preventDefault()
+        this.props.tripSubmitHandler(this.state)
+    }
+
     render() {
         return (
-            <form id="trip-form">
-                <input type="date" name="date" value={this.state.date} onChange={this.changeHandler} />
-                <input type="text" name="location" value={this.state.location} onChange={this.changeHandler} />
-                <select value={this.state.continent} onChange={this.changeHandler}>
+            <form id="trip-form" onSubmit={this.submitHandler}>
+                <input type="date" name="travel_date" value={this.state.travel_date} onChange={this.changeHandler} />
+                <input type="text" name="destination" placeholder="Destination" value={this.state.destination} onChange={this.changeHandler} />
+                <select name="continent" value={this.state.continent} onChange={this.changeHandler}>
                     <option>Choose a continent</option>
-                    <option>North America</option>
-                    <option>South America</option>
-                    <option>Europe</option>
-                    <option>Austrlia</option>
-                    <option>Africa</option>
-                    <option>Asia</option>
-                    <option>Antarctica</option>
+                    <option value="North America">North America</option>
+                    <option value="South America">South America</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Australia">Austrlia</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Antarctica">Antarctica</option>
                 </select>
                 <input type="submit" vakue="Submit Trip" />
             </form>
