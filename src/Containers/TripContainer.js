@@ -67,6 +67,7 @@ class TripContainer extends React.Component {
     }
 
     render() {
+        console.log("Container props: ", this.props)
         return (
             <div id="trip-container">
                 {this.state.northAmerica.length > 0 ?

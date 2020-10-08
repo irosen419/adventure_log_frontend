@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Dashboard from './Containers/Dashboard'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -25,7 +26,7 @@ class App extends React.Component {
           }))
         })
     } else {
-      console.log('Log in yo')
+      this.props.history.push('/login')
     }
   }
 
@@ -44,7 +45,7 @@ class App extends React.Component {
         localStorage.setItem("token", userData.jwt);
         this.setState(() => ({
           user: userData.user
-        }), () => this.props.history.push())
+        }), () => this.props.history.push('/dashboard'))
       })
   }
 
@@ -63,18 +64,20 @@ class App extends React.Component {
         localStorage.setItem("token", userData.jwt);
         this.setState(() => ({
           user: userData.user
-        }))
+        }), () => this.props.history.push('/dashboard'))
       })
   }
 
   render() {
     return (
       <div id="app">
-        <Login loginHandler={this.loginHandler} />
-        <Signup signupHandler={this.signupHandler} />
-        <Dashboard user={this.state.user} />
+        <Switch>
+          <Route path='/login' render={() => <Login loginHandler={this.loginHandler} />} />
+          <Route path='/signup' render={() => <Signup signupHandler={this.signupHandler} />} />
+          <Route path='/dashboard' render={() => <Dashboard user={this.state.user} />} />
+        </Switch>
       </div>
     )
   }
 }
-export default App
+export default withRouter(App)

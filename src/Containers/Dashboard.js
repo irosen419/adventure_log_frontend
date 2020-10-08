@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
 
         fetch('http://localhost:3000/api/v1/trips', options)
             .then(resp => resp.json())
-            .then(trip => this.setState((previousState) => ({ tripsArray: [...previousState.tripsArray, trip] })))
+            .then(trip => this.setState((previousState) => ({ tripsArray: [...previousState.tripsArray, trip.trip] })))
     }
 
     render() {

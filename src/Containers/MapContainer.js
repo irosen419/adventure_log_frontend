@@ -38,7 +38,6 @@ class MapContainer extends React.Component {
     }
 
     mapStores = () => {
-        console.log(this.state.coordinatesArray)
         return this.state.coordinatesArray.map(coord => <Marker position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => console.log("Clicked! ", coord.longitude)} />)
     }
 
