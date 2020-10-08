@@ -4,6 +4,7 @@ import Dashboard from './Containers/Dashboard'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import TripShow from './Containers/TripShow'
+import EncounterShow from './Containers/EncounterShow'
 
 
 import './App.css';
@@ -24,7 +25,7 @@ class App extends React.Component {
         .then(userData => {
           this.setState(() => ({
             user: userData.user
-          }))
+          }), () => this.props.history.push('/dashboard'))
         })
     } else {
       this.props.history.push('/login')
@@ -93,6 +94,7 @@ class App extends React.Component {
               <TripShow user={this.state.user} />
               : null
           }} />
+          <Route path='/encounter/:id' render={() => <EncounterShow />} />
         </Switch>
       </div>
     )

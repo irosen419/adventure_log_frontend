@@ -1,7 +1,6 @@
 import React from 'react'
 import TripCard from '../Components/TripCard'
-
-import { Route, Switch, withRouter, NavLink } from 'react-router-dom'
+import { withRouter, NavLink } from 'react-router-dom'
 
 class TripContainer extends React.Component {
 
@@ -68,64 +67,57 @@ class TripContainer extends React.Component {
 
     render() {
         return (
-            <Switch>
-                <Route
-                    path='/dashboard'
-                    render={() =>
-                        <div id="trip-container">
-                            {this.state.northAmerica.length > 0 ?
-                                <div className="continent" id="NA">
-                                    <h2>North America</h2>
-                                    {this.mapTrips(this.state.northAmerica)}
-                                </div> :
-                                null
-                            }
-                            {this.state.southAmerica.length > 0 ?
-                                <div className="continent" id="SA">
-                                    <h2>South America</h2>
-                                    {this.mapTrips(this.state.southAmerica)}
-                                </div> :
-                                null
-                            }
-                            {this.state.europe.length > 0 ?
-                                <div className="continent" id="EU">
-                                    <h2>Europe</h2>
-                                    {this.mapTrips(this.state.europe)}
-                                </div> :
-                                null
-                            }
-                            {this.state.asia.length > 0 ?
-                                <div className="continent" id="AS">
-                                    <h2>Asia</h2>
-                                    {this.mapTrips(this.state.asia)}
-                                </div> :
-                                null
-                            }
-                            {this.state.australia.length > 0 ?
-                                <div className="continent" id="AU">
-                                    <h2>Australia</h2>
-                                    {this.mapTrips(this.state.australia)}
-                                </div> :
-                                null
-                            }
-                            {this.state.africa.length > 0 ?
-                                <div className="continent" id="AF">
-                                    <h2>Africa</h2>
-                                    {this.mapTrips(this.state.africa)}
-                                </div> :
-                                null
-                            }
-                            {this.state.antarctica.length > 0 ?
-                                <div className="continent" id="AN">
-                                    <h2>Antarctica</h2>
-                                    {this.mapTrips(this.state.antarctica)}
-                                </div> :
-                                null
-                            }
-                        </div>
-                    } />
-
-            </Switch>
+            <div id="trip-container">
+                {this.state.northAmerica.length > 0 ?
+                    <div className="continent" id="NA">
+                        <h2>North America</h2>
+                        {this.mapTrips(this.state.northAmerica)}
+                    </div> :
+                    null
+                }
+                {this.state.southAmerica.length > 0 ?
+                    <div className="continent" id="SA">
+                        <h2>South America</h2>
+                        {this.mapTrips(this.state.southAmerica)}
+                    </div> :
+                    null
+                }
+                {this.state.europe.length > 0 ?
+                    <div className="continent" id="EU">
+                        <h2>Europe</h2>
+                        {this.mapTrips(this.state.europe)}
+                    </div> :
+                    null
+                }
+                {this.state.asia.length > 0 ?
+                    <div className="continent" id="AS">
+                        <h2>Asia</h2>
+                        {this.mapTrips(this.state.asia)}
+                    </div> :
+                    null
+                }
+                {this.state.australia.length > 0 ?
+                    <div className="continent" id="AU">
+                        <h2>Australia</h2>
+                        {this.mapTrips(this.state.australia)}
+                    </div> :
+                    null
+                }
+                {this.state.africa.length > 0 ?
+                    <div className="continent" id="AF">
+                        <h2>Africa</h2>
+                        {this.mapTrips(this.state.africa)}
+                    </div> :
+                    null
+                }
+                {this.state.antarctica.length > 0 ?
+                    <div className="continent" id="AN">
+                        <h2>Antarctica</h2>
+                        {this.mapTrips(this.state.antarctica)}
+                    </div> :
+                    null
+                }
+            </div>
         )
     }
 }

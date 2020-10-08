@@ -40,12 +40,16 @@ class SearchForm extends React.Component {
         })
     }
 
-    clickHandler = (e, animalId) => {
-        console.log(animalId)
+    clickHandler = (animal) => {
+        this.setState(() => ({
+            search: animal.common_name,
+            suggestions: []
+        }))
+        this.props.encounterAnimalHandler(animal)
     }
 
     mapAnimals = () => {
-        return this.state.suggestions.map(animal => <li key={animal.id} onClick={(e) => this.clickHandler(e, animal.id)}>{animal.common_name}</li>)
+        return this.state.suggestions.map(animal => <li key={animal.id} onClick={() => this.clickHandler(animal)}>{animal.common_name}</li>)
     }
 
     renderSuggestions = () => {
