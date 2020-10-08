@@ -5,18 +5,14 @@ import Geocode from "react-geocode";
 class MapContainer extends React.Component {
 
     state = {
-        tripsArray: [],
         coordinatesArray: []
     }
 
     componentDidMount() {
-        this.fetchTrips()
-    }
-
-    fetchTrips = () => {
-        fetch('http://localhost:3000/api/v1/users/1/trips')
-            .then(resp => resp.json())
-            .then(trips => this.setState(() => ({ tripsArray: trips }), () => this.state.tripsArray.map(trip => this.geocode(trip.destination))))
+        let tripsArray = this.props.user.my_trips
+        for (let i = 0; i < tripsArray.length; i++) {
+            this.geocode(tripsArray[i].destination)
+        }
     }
 
     geocode = (destination) => {
@@ -34,7 +30,7 @@ class MapContainer extends React.Component {
     }
 
     mapStores = () => {
-        return this.state.coordinatesArray.map(coord => <Marker key={coord.destination} position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => console.log("Clicked! ", coord.longitude)} />)
+        return this.state.coordinatesArray.map(coord => <Marker position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => console.log("Clicked! ", coord.longitude)} />)
     }
 
     mapStyles = () => {
@@ -57,7 +53,7 @@ class MapContainer extends React.Component {
                 >
                     {this.mapStores()}
                 </Map >
-            </div>
+            </div >
         );
     }
 }
