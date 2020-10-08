@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import Dashboard from './Containers/Dashboard'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
+import TripShow from './Containers/TripShow'
 
 
 import './App.css';
@@ -72,9 +73,26 @@ class App extends React.Component {
     return (
       <div id="app">
         <Switch>
-          <Route path='/login' render={() => <Login loginHandler={this.loginHandler} />} />
-          <Route path='/signup' render={() => <Signup signupHandler={this.signupHandler} />} />
-          <Route path='/dashboard' render={() => <Dashboard user={this.state.user} />} />
+          <Route
+            path='/login'
+            render={() => <Login loginHandler={this.loginHandler} />}
+          />
+          <Route
+            path='/signup'
+            render={() => <Signup signupHandler={this.signupHandler} />}
+          />
+          <Route
+            path='/dashboard'
+            render={() => {
+              return this.state.user ?
+                <Dashboard user={this.state.user} />
+                : null
+            }} />
+          <Route path='/trip/:id' render={() => {
+            return this.state.user ?
+              <TripShow user={this.state.user} />
+              : null
+          }} />
         </Switch>
       </div>
     )

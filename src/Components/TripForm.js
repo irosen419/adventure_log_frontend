@@ -14,7 +14,7 @@ class TripForm extends React.Component {
     }
 
     submitHandler = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         this.props.tripSubmitHandler(this.state)
     }
 

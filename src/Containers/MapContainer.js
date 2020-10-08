@@ -9,17 +9,9 @@ class MapContainer extends React.Component {
     }
 
     componentDidMount() {
-        let tripsArray = this.props.user.my_trips.concat(this.props.trips)
+        let tripsArray = this.props.user.my_trips
         for (let i = 0; i < tripsArray.length; i++) {
             this.geocode(tripsArray[i].destination)
-        }
-    }
-
-    componentDidUpdate(pP, pS) {
-        if (pP.trips !== this.props.trips) {
-            for (let i = 0; i < this.props.trips.length; i++) {
-                this.geocode(this.props.trips[i].destination)
-            }
         }
     }
 
@@ -61,7 +53,7 @@ class MapContainer extends React.Component {
                 >
                     {this.mapStores()}
                 </Map >
-            </div>
+            </div >
         );
     }
 }
