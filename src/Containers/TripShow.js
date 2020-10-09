@@ -74,7 +74,7 @@ class TripShow extends React.Component {
             <div id="trip">
                 <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
                 <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
-                <h1 id="trip-show">{this.state.trip.destination} - {this.state.trip.travel_date}</h1>
+                <h1 id="trip-show">{this.state.trip.destination} - {this.state.trip.date}</h1>
                 {this.state.trip ? this.mapEncounters() : <h3>LOADING..</h3>}
             </div>
         )

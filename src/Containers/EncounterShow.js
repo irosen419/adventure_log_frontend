@@ -1,4 +1,5 @@
 import React from 'react'
+import AnimalShow from '../Components/AnimalShow'
 
 class EncounterShow extends React.Component {
 
@@ -6,6 +7,7 @@ class EncounterShow extends React.Component {
         encounter: "",
         animalInfo: ""
     }
+
     componentDidMount() {
         const animal = localStorage.getItem("sci_name").toLowerCase().split(" ").join("%20")
         fetch(`https://apiv3.iucnredlist.org/api/v3/species/narrative/${animal}?token=${process.env.REACT_APP_IUCN_KEY}`)
@@ -24,12 +26,23 @@ class EncounterShow extends React.Component {
             .then(encounterObj => this.setState(() => ({ encounter: encounterObj.encounter })))
     }
 
+    mapInfo = () => {
+        let array = []
+        for (let attr in this.state.animalInfo) {
+            if (attr !== 'species_id' && attr !== 'rationale' && attr !== 'taxonomicnotes' && attr !== 'usetrade') {
+                array.push(<AnimalShow title={attr} info={this.state.animalInfo[attr]} />)
+            }
+        }
+        return array
+    }
+
     render() {
+        console.log(this.state.animalInfo)
         return (
             <div>
                 <h1>{localStorage.getItem("common_name")}</h1>
-                <p>{this.state.encounter ? this.state.encounter.notes : null}</p>
-                <p>{this.state.animalInfo ? this.state.animalInfo.geographicrange.replace( /(<([^>]+)>)/ig, '') : null}</p>
+                <h4>{this.state.encounter ? this.state.encounter.notes : null}</h4>
+                {this.state.animalInfo ? this.mapInfo() : null}
             </div>
         )
     }
