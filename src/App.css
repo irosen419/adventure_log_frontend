@@ -1,17 +1,53 @@
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: black
+}
+
+#header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 75px;
+  background-color: blue;
+}
+
+#header a {
+  font-size: larger;
+  margin-left: 25px;
+}
+
 #trip-map {
   height: 50%;
   width: 45%;
 }
 
-#trip-form {
+#location-info {
   position: absolute;
-  left: 35%;
-  top: 10%;
+  text-align: center;
+  right: 77.5%;
+  top: 45%;
+  z-index: 2;
+}
+
+#trip-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  position: absolute;
+  bottom: 30%;
+}
+
+#trip-form button {
+  font-size: large;
 }
 
 #trip-container {
   position: absolute;
-  bottom: 0;
+  top: 70%;
   width: 100%;
 
   display: flex;
@@ -21,4 +57,19 @@
 #trip-container div {
   text-align: center;
   margin: 10px;
+}
+
+#trip {
+  display: flex;
+  flex-direction: column;
+}
+
+#trip #flex {
+  display: flex;
+}
+
+#trip #flex #location-map div:first-child {
+  margin-left: 0;
+  max-width: 45vw;
+  max-height: 25vw;
 }

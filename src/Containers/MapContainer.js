@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
 
@@ -8,20 +9,20 @@ class MapContainer extends React.Component {
         coordinatesArray: []
     }
 
-    componentDidMount() {
-        let tripsArray = this.props.user.my_trips
-        for (let i = 0; i < tripsArray.length; i++) {
-            this.geocode(tripsArray[i].destination)
+    componentDidUpdate(pP, pS) {
+        if (pP.trips !== this.props.trips) {
+            this.mapTrips(this.props.trips)
         }
     }
 
-    geocode = (destination) => {
+    geocode = (trip) => {
         Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
         Geocode.setLanguage("en");
-        Geocode.fromAddress(destination).then(
+        return Geocode.fromAddress(trip.destination).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                this.setState((previousState) => ({ coordinatesArray: [...previousState.coordinatesArray, { destination: destination, latitude: lat, longitude: lng }] }))
+
+                return ({ id: trip.id, destination: trip.destination, latitude: lat, longitude: lng })
             },
             error => {
                 console.error(error);
@@ -29,8 +30,15 @@ class MapContainer extends React.Component {
         );
     }
 
-    mapStores = () => {
-        return this.state.coordinatesArray.map(coord => <Marker position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => console.log("Clicked! ", coord.longitude)} />)
+    mapTrips = (tripsArray) => {
+        for (const trip of tripsArray) {
+            this.geocode(trip).then((coords) => this.setState((previousState) => ({ coordinatesArray: [...previousState.coordinatesArray, coords] })))
+        }
+    }
+
+
+    makeMarkers = () => {
+        return this.state.coordinatesArray.map(coord => <Marker name={coord.destination} title={coord.destination} id={coord.id} position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => this.props.history.push(`/trip/${coord.id}`)} />)
     }
 
     mapStyles = () => {
@@ -38,6 +46,7 @@ class MapContainer extends React.Component {
             height: '50%',
             width: '45%',
             margin: 'auto',
+            marginTop: '25px',
         };
     }
 
@@ -50,8 +59,9 @@ class MapContainer extends React.Component {
                     style={this.mapStyles()}
                     initialCenter={{ lat: 20, lng: 12 }}
                     mapType={window.google.maps.MapTypeId.SATELLITE}
+                    onClick={this.onMapClicked}
                 >
-                    {this.mapStores()}
+                    {this.state.coordinatesArray.length === 0 ? this.mapTrips(this.props.trips) : this.makeMarkers()}
                 </Map >
             </div >
         );
@@ -60,4 +70,4 @@ class MapContainer extends React.Component {
 
 export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_KEY
-})(MapContainer);
+})(withRouter(MapContainer));

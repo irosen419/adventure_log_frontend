@@ -13,8 +13,14 @@ class EncounterForm extends React.Component {
         this.setState(() => ({ [e.target.name]: e.target.value }))
     }
 
-    submitHandler = () => {
+    submitHandler = (e) => {
+        e.preventDefault()
         this.props.encounterNotesHandler(this.state)
+        this.setState(() => ({
+            time_of_day: "",
+            weather_conditions: "",
+            notes: ""
+        }))
     }
 
     render() {

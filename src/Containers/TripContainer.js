@@ -2,20 +2,10 @@ import React from 'react'
 import TripCard from '../Components/TripCard'
 import { withRouter, NavLink } from 'react-router-dom'
 
-class TripContainer extends React.Component {
+function TripContainer(props) {
 
-    state = {
-        northAmerica: [],
-        southAmerica: [],
-        europe: [],
-        asia: [],
-        australia: [],
-        africa: [],
-        antarctica: []
-    }
-
-    componentDidMount() {
-        let tripsArray = this.props.user.my_trips
+    const continentArrays = () => {
+        let tripsArray = props.trips
         let nA = []
         let sA = []
         let eU = []
@@ -47,79 +37,38 @@ class TripContainer extends React.Component {
                     aN.push(tripsArray[i])
                     break
                 default:
-                    console.log('nothing')
+                    break
             }
         }
-        this.setState(() => ({
-            northAmerica: nA,
-            southAmerica: sA,
-            europe: eU,
-            asia: aS,
-            australia: aU,
-            africa: aF,
-            antarctica: aN
-        }))
+        return { 'North America': nA, 'South America': sA, 'Europe': eU, 'Asia': aS, 'Africa': aF, 'Australia': aU, 'Antarctica': aN }
     }
 
-    mapTrips = (continentArray) => {
+    const mapTrips = (continentArray) => {
         return continentArray.map(trip => <NavLink to={`/trip/${trip.id}`}><TripCard trip={trip} /></NavLink>)
     }
 
-    render() {
+    const setDOM = () => {
+        let arrayOfContinents = []
+        for (let continent in continentArrays()) {
+            if (continentArrays()[continent].length > 0) {
+                arrayOfContinents.push(
+                    <div className="continent" id="NA">
+                        <h2>{continent}</h2>
+                        {mapTrips(continentArrays()[continent])}
+                    </div>
+                )
+            }
+        }
         return (
             <div id="trip-container">
-                {this.state.northAmerica.length > 0 ?
-                    <div className="continent" id="NA">
-                        <h2>North America</h2>
-                        {this.mapTrips(this.state.northAmerica)}
-                    </div> :
-                    null
-                }
-                {this.state.southAmerica.length > 0 ?
-                    <div className="continent" id="SA">
-                        <h2>South America</h2>
-                        {this.mapTrips(this.state.southAmerica)}
-                    </div> :
-                    null
-                }
-                {this.state.europe.length > 0 ?
-                    <div className="continent" id="EU">
-                        <h2>Europe</h2>
-                        {this.mapTrips(this.state.europe)}
-                    </div> :
-                    null
-                }
-                {this.state.asia.length > 0 ?
-                    <div className="continent" id="AS">
-                        <h2>Asia</h2>
-                        {this.mapTrips(this.state.asia)}
-                    </div> :
-                    null
-                }
-                {this.state.australia.length > 0 ?
-                    <div className="continent" id="AU">
-                        <h2>Australia</h2>
-                        {this.mapTrips(this.state.australia)}
-                    </div> :
-                    null
-                }
-                {this.state.africa.length > 0 ?
-                    <div className="continent" id="AF">
-                        <h2>Africa</h2>
-                        {this.mapTrips(this.state.africa)}
-                    </div> :
-                    null
-                }
-                {this.state.antarctica.length > 0 ?
-                    <div className="continent" id="AN">
-                        <h2>Antarctica</h2>
-                        {this.mapTrips(this.state.antarctica)}
-                    </div> :
-                    null
-                }
+                {arrayOfContinents}
             </div>
         )
     }
+
+    return (
+        setDOM()
+    )
 }
 
 export default withRouter(TripContainer)
