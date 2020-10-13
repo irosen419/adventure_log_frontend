@@ -5,7 +5,8 @@ class EncounterForm extends React.Component {
     state = {
         time_of_day: "",
         weather_conditions: "",
-        notes: ""
+        notes: "",
+        photo: ""
     }
 
     changeHandler = (e) => {
@@ -23,6 +24,13 @@ class EncounterForm extends React.Component {
         }))
     }
 
+    pictureHandler = (e) => {
+        e.persist()
+        if (e.target.files[0]) {
+            this.setState({ photo: e.target.files[0] })
+        }
+    }
+
     render() {
         return (
             <form onSubmit={this.submitHandler}>
@@ -34,6 +42,7 @@ class EncounterForm extends React.Component {
                 </select>
                 <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
                 <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
+                <input type="file" name="photo" accept="image/*" onChange={this.pictureHandler} />
                 <input type="submit" value="Submit" />
             </form>
         )

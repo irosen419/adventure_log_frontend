@@ -76,12 +76,13 @@ class EncounterShow extends React.Component {
 
     encounterNotesHandler = (note) => {
         const encounterId = window.location.pathname.split('/')[2]
-        const encounterObj = {
-            animal_id: this.state.animalId,
-            time_of_day: note.time_of_day,
-            weather_conditions: note.weather_conditions,
-            notes: note.notes
-        }
+        let formData = new FormData()
+        debugger
+        formData.append('encounter[animal_id]', this.state.animalId)
+        formData.append('encounter[time_of_day]', note.time_of_day)
+        formData.append('encounter[weather_conditions]', note.weather_conditions)
+        formData.append('encounter[notes]', note.notes)
+        formData.append('encounter[photo]', note.photo)
 
         const options = {
             method: 'PATCH',
@@ -90,7 +91,7 @@ class EncounterShow extends React.Component {
                 'Content-type': 'application/json',
                 'Accepts': 'application/json',
             },
-            body: JSON.stringify(encounterObj)
+            body: JSON.stringify(formData)
         }
 
         fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
@@ -99,22 +100,25 @@ class EncounterShow extends React.Component {
                 encounter: encounter.encounter,
                 edit: false
             }), () => this.fetchAnimalInfo()))
-        //(encounter) => this.setState(() => ({ encounter: encounter }))
     }
 
     render() {
+        console.log(this.state.encounter)
         return (
-            <div>
-                <h1>{localStorage.getItem("common_name")}</h1>
-                <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
-                {this.state.animalInfo ? this.mapInfo() : <h3>Loading conservation information...</h3>}
-                {this.state.edit ? <div id='edit-form'>
-                    <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
-                    <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
+            <div id='encounter-main'>
+                <div id='encounter-info'>
+                    <h1>{localStorage.getItem("common_name")}</h1>
+                    <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
+                    {this.state.animalInfo ? this.mapInfo() : <h3>Loading conservation information...</h3>}
+                    {this.state.edit ? <div id='edit-form'>
+                        <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
+                        <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
+                    </div>
+                        : null}
+                    <button onClick={this.deleteEncounter}>Delete this encounter</button>
+                    <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
                 </div>
-                    : null}
-                <button onClick={this.deleteEncounter}>Delete this encounter</button>
-                <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
+                {this.state.encounter.img_url ? <img src={this.state.encounter.img_url} alt={localStorage.getItem("common_name")} /> : null}
             </div>
         )
     }

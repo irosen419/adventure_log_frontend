@@ -73,3 +73,19 @@ a:visited {
   max-width: 45vw;
   max-height: 25vw;
 }
+
+#encounter-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#encounter-main img{
+  margin: 5% auto 0 2%;
+  width: 400px;
+  height: auto;
+}
+
+#encounter-info {
+  min-width: 50%;
+  max-width: 50%;
+}
