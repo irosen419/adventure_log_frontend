@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom'
+import Header from './Components/Header'
 import Dashboard from './Containers/Dashboard'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -25,7 +26,7 @@ class App extends React.Component {
         .then(userData => {
           this.setState(() => ({
             user: userData.user
-          }), () => this.props.history.push('/dashboard'))
+          }))
         })
     } else {
       this.props.history.push('/login')
@@ -73,6 +74,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="app">
+        {this.state.user ? <Header /> : null}
         <Switch>
           <Route
             path='/login'
