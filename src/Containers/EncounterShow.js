@@ -82,7 +82,7 @@ class EncounterShow extends React.Component {
         formData.append('encounter[time_of_day]', note.time_of_day)
         formData.append('encounter[weather_conditions]', note.weather_conditions)
         formData.append('encounter[notes]', note.notes)
-        formData.append('encounter[photos]', note.photos)
+        formData.append('encounter[photo]', note.photo)
 
         const options = {
             method: 'PATCH',
