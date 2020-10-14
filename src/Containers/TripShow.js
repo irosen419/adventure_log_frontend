@@ -54,6 +54,7 @@ class TripShow extends React.Component {
         formData.append('encounter[weather_conditions]', note.weather_conditions)
         formData.append('encounter[notes]', note.notes)
         formData.append('encounter[photo]', note.photo)
+        //console.log('help')
 
         const options = {
             method: 'POST',
