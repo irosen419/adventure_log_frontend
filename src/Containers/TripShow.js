@@ -44,28 +44,29 @@ class TripShow extends React.Component {
     }
 
     encounterNotesHandler = (note) => {
-        const encounterObj = {
-            trip_id: this.state.trip.id,
-            animal_id: this.state.animalId,
-            time_of_day: note.time_of_day,
-            weather_conditions: note.weather_conditions,
-            notes: note.notes
-        }
+        let formData = new FormData()
+
+        // console.log(this.state.animalId)
+
+        formData.append('encounter[trip_id]', this.state.trip.id)
+        formData.append('encounter[animal_id]', this.state.animalId)
+        formData.append('encounter[time_of_day]', note.time_of_day)
+        formData.append('encounter[weather_conditions]', note.weather_conditions)
+        formData.append('encounter[notes]', note.notes)
+        formData.append('encounter[photo]', note.photo)
 
         const options = {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`,
-                'Content-type': 'application/json',
-                'Accepts': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
             },
-            body: JSON.stringify(encounterObj)
+            body: formData
         }
 
         fetch('http://localhost:3000/api/v1/encounters', options)
             .then(resp => resp.json())
             .then(encounter => this.setState((previousState) => ({ encounterArray: [...previousState.encounterArray, encounter.encounter] })))
-
+        //encounter => this.setState((previousState) => ({ encounterArray: [...previousState.encounterArray, encounter.encounter] }))
     }
 
     mapEncounters = () => {
@@ -143,10 +144,10 @@ class TripShow extends React.Component {
                                 google={this.props.google}
                                 zoom={4.5}
                                 style={this.mapStyles()}
-                                initialCenter={{ lat: this.state.tripLocation.latitude, lng: this.state.tripLocation.longitude + 4 }}
+                                initialCenter={{ lat: this.state.tripLocation.latitude, lng: this.state.tripLocation.longitude }}
                                 mapType={window.google.maps.MapTypeId.SATELLITE}
-                                mapOptions={{ zoomControl: false }}
-                                disableDefaultUI={true}
+                                // mapOptions={{ zoomControl: false }}
+                                // disableDefaultUI={true}
                                 onClick={this.onMapClicked}
                             >
                                 <Marker name={this.state.tripLocation.destination} title={this.state.tripLocation.destination} id={this.state.tripLocation.id} position={{ lat: this.state.tripLocation.latitude, lng: this.state.tripLocation.longitude }} />
