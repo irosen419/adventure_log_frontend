@@ -112,6 +112,10 @@ class EncounterShow extends React.Component {
             })
     }
 
+    mapImages = () => {
+        return this.state.encounter.encounter_images.record.photos.map(img_url => <img src={img_url} alt={localStorage.getItem("common_name")} />)
+    }
+
     render() {
         console.log(this.state.encounter)
         return (
@@ -124,13 +128,13 @@ class EncounterShow extends React.Component {
                     {this.state.animalInfo ? this.mapInfo() : <h3>Loading conservation information...</h3>}
                     {this.state.edit ? <div id='edit-form'>
                         <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
-                        <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
+                        <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
                     </div>
                         : null}
                     <button onClick={this.deleteEncounter}>Delete this encounter</button>
                     <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
                 </div>
-                {this.state.encounter.img_url ? <img src={this.state.encounter.img_url} alt={localStorage.getItem("common_name")} /> : null}
+                {this.state.encounter ? this.mapImages() : null}
             </div>
         )
     }
