@@ -76,13 +76,20 @@ class EncounterShow extends React.Component {
 
     encounterNotesHandler = (note) => {
         const encounterId = window.location.pathname.split('/')[2]
-        let formData = new FormData()
-        // debugger
-        if (this.state.animalId) { formData.append('encounter[animal_id]', this.state.animalId) }
-        if (note.time_of_day) { formData.append('encounter[time_of_day]', note.time_of_day) }
-        if (note.weather_conditions) { formData.append('encounter[weather_conditions]', note.weather_conditions) }
-        if (note.notes) { formData.append('encounter[notes]', note.notes) }
-        if (note.photo) { formData.append('encounter[photo]', note.photo) }
+        // let formData = new FormData()
+
+        // if (this.state.animalId) { formData.append('encounter[animal_id]', this.state.animalId) }
+        // if (note.time_of_day) { formData.append('encounter[time_of_day]', note.time_of_day) }
+        // if (note.weather_conditions) { formData.append('encounter[weather_conditions]', note.weather_conditions) }
+        // if (note.notes) { formData.append('encounter[notes]', note.notes) }
+        // if (note.photo) { formData.append('encounter[photo]', note.photo) }
+
+        let editObj = {}
+
+        if (this.state.animalId) { editObj.animal_id = this.state.animalId }
+        if (note.time_of_day) { editObj.time_of_day = note.time_of_day }
+        if (note.weather_conditions) { editObj.weather_conditions = note.weather_conditions }
+        if (note.notes) { editObj.notes = note.notes }
 
         const options = {
             method: 'PATCH',
@@ -91,7 +98,7 @@ class EncounterShow extends React.Component {
                 'Content-type': 'application/json',
                 'Accepts': 'application/json',
             },
-            body: formData
+            body: JSON.stringify(editObj)
         }
 
         fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
