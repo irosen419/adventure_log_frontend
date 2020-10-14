@@ -45,16 +45,13 @@ class TripShow extends React.Component {
 
     encounterNotesHandler = (note) => {
         let formData = new FormData()
-
-        // console.log(this.state.animalId)
-
+        console.log("FILE", note.photo)
         formData.append('encounter[trip_id]', this.state.trip.id)
         formData.append('encounter[animal_id]', this.state.animalId)
         formData.append('encounter[time_of_day]', note.time_of_day)
         formData.append('encounter[weather_conditions]', note.weather_conditions)
         formData.append('encounter[notes]', note.notes)
-        formData.append('encounter[photo]', note.photo)
-        //console.log('help')
+        if (note.photo) { formData.append('encounter[photo]', note.photo) }
 
         const options = {
             method: 'POST',
