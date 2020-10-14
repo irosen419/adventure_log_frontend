@@ -51,7 +51,10 @@ class TripShow extends React.Component {
         formData.append('encounter[time_of_day]', note.time_of_day)
         formData.append('encounter[weather_conditions]', note.weather_conditions)
         formData.append('encounter[notes]', note.notes)
-        if (note.photo) { formData.append('encounter[photo]', note.photo) }
+        const files = note.photos;
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`encounter[images][${i}]`, files[i])
+        }
 
         const options = {
             method: 'POST',

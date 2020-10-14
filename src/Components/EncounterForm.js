@@ -6,7 +6,8 @@ class EncounterForm extends React.Component {
         time_of_day: "",
         weather_conditions: "",
         notes: "",
-        photo: ""
+        photo_URLs: [],
+        photos: []
     }
 
     changeHandler = (e) => {
@@ -26,9 +27,24 @@ class EncounterForm extends React.Component {
 
     pictureHandler = (e) => {
         e.persist()
-        if (e.target.files[0]) {
-            this.setState({ photo: e.target.files[0] })
+        let fileArray = []
+        let i = 0;
+        while (i < e.target.files.length) {
+            fileArray.push(e.target.files[i])
+            i++
         }
+        for (const file of fileArray) {
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
+            fileReader.onloadend = () => {
+                this.setState(() => ({
+                    photo_URLs: [fileReader.result, ...this.state.photo_URLs]
+                }))
+            }
+        }
+        this.setState(() => ({
+            photos: [fileArray, ...this.state.photos].flat()
+        }))
     }
 
     render() {
@@ -42,7 +58,7 @@ class EncounterForm extends React.Component {
                 </select>
                 <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
                 <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
-                <input type="file" name="photo" accept="image/*" onChange={this.pictureHandler} />
+                {this.props.edit ? null : <input type="file" multiple name="photos" accept="image/*" onChange={this.pictureHandler} />}
                 <input type="submit" value="Submit" />
             </form>
         )
