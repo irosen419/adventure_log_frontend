@@ -8,6 +8,7 @@ class Dashboard extends React.Component {
 
     state = {
         tripsArray: [],
+        currentFollowings: this.props.followings,
         followingsArray: []
     }
 
@@ -53,24 +54,6 @@ class Dashboard extends React.Component {
             .then(trip => this.setState((previousState) => ({ tripsArray: [...previousState.tripsArray, trip.trip] })))
     }
 
-    followHandler = () => {
-        const userId = this.props.user.id
-        const followingId = window.location.pathname.split('/')[2]
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`,
-                'Content-type': 'application/json',
-                'Accepts': 'application/json',
-            },
-            body: JSON.stringify({ friendship: { follower_id: userId, following_id: followingId } })
-        }
-
-        fetch(`http://localhost:3000/api/v1/users/${userId}/friendship`, options)
-
-    }
-
     fetchFollowings = () => {
         const userId = window.location.pathname.split('/')[2]
         fetch(`http://localhost:3000/api/v1/users/${userId}/followings`, {
@@ -79,18 +62,28 @@ class Dashboard extends React.Component {
         })
             .then(resp => resp.json())
             .then(users => {
-                let array = users.followings.map(user => <a href={`/dashboard/${user.id}`}><p onClick={() => {
-                    localStorage.setItem("userId", this.props.user.id)
+                let array = users.followings.map(user => <a key={user.id} href={`/dashboard/${user.id}`}><p onClick={() => {
+                    localStorage.setItem("userId", user.id)
                     localStorage.setItem("username", user.username)
                 }}>{user.username}</p></a>)
                 this.setState(() => ({ followingsArray: array }))
             })
     }
 
+    checkFollowing = () => {
+        return this.props.followings.find(user => user.username === localStorage.getItem("username"))
+    }
+
+    followButton = () => {
+        return this.checkFollowing() ?
+            <a href={`/dashboard/${this.props.user.id}`}><button onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
+            : <button onClick={(e) => this.props.friendHandler(e)}>Follow</button>
+    }
+
     render() {
         return (
             <div id="dashboard">
-                {this.props.user.id.toString() != window.location.pathname.split('/')[2] ? <button onClick={this.followHandler}>Follow</button> : null}
+                {this.props.user.id.toString() !== window.location.pathname.split('/')[2] ? this.followButton() : null}
                 <div id='followings'>
                     <h2>{localStorage.getItem("username")} is following</h2>
                     {this.state.followingsArray}

@@ -44,7 +44,8 @@ function TripContainer(props) {
     }
 
     const mapTrips = (continentArray) => {
-        return continentArray.map(trip => <NavLink to={`/trip/${trip.id}`}><TripCard trip={trip} /></NavLink>)
+        return continentArray.map(trip => <NavLink key={trip.id} to={`/trip/${trip.id}`}><TripCard key={trip.id} trip={trip} /></NavLink>
+        )
     }
 
     const setDOM = () => {
@@ -52,7 +53,7 @@ function TripContainer(props) {
         for (let continent in continentArrays()) {
             if (continentArrays()[continent].length > 0) {
                 arrayOfContinents.push(
-                    <div className="continent" id="NA">
+                    <div className="continent" key={continent}>
                         <h2>{continent}</h2>
                         {mapTrips(continentArrays()[continent])}
                     </div>

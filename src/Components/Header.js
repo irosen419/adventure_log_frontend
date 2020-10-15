@@ -5,9 +5,13 @@ function Header(props) {
 
     const decideUserButton = () => {
         return window.location.pathname.split('/')[1] !== 'dashboard' &&
-            window.location.pathname.split('/')[2] !== props.user.id ?
-            <NavLink to={`/dashboard/${localStorage.getItem('userId')}`}>Back to other User</NavLink>
+            localStorage.getItem("userId") !== props.user.id.toString() ?
+            <NavLink to={`/dashboard/${localStorage.getItem('userId')}`}>Back to {localStorage.getItem("username")}'s dashboard</NavLink>
             : null
+    }
+
+    const logout = () => {
+        localStorage.clear()
     }
 
     return (
@@ -18,6 +22,7 @@ function Header(props) {
             }}>Dashboard</a>
             {decideUserButton()}
             {window.location.pathname.split('/')[1] === 'encounter' ? <NavLink to={`/trip/${localStorage.getItem('tripId')}`}>{localStorage.getItem('tripName')}</NavLink> : null}
+            <a href='/login' onClick={logout}>Logout</a>
         </div>
     )
 }
