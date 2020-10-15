@@ -55,7 +55,7 @@ class MapContainer extends React.Component {
             <div id="trip-map">
                 <Map
                     google={this.props.google}
-                    zoom={1.25}
+                    zoom={1.5}
                     style={this.mapStyles()}
                     initialCenter={{ lat: 20, lng: 12 }}
                     mapType={window.google.maps.MapTypeId.SATELLITE}

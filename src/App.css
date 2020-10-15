@@ -89,3 +89,11 @@ a:visited {
   min-width: 50%;
   max-width: 50%;
 }
+
+#followings {
+  position: absolute;
+  top: 10%;
+  left: 2%;
+
+  z-index: 3;
+}

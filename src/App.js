@@ -46,9 +46,10 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(userData => {
         localStorage.setItem("token", userData.jwt);
+        localStorage.setItem("userId", userData.user.id);
         this.setState(() => ({
           user: userData.user
-        }), () => this.props.history.push('/dashboard'))
+        }), () => this.props.history.push(`/dashboard/${this.state.user.id}`))
       })
   }
 
@@ -65,16 +66,17 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(userData => {
         localStorage.setItem("token", userData.jwt);
+        localStorage.setItem("userId", userData.user.id)
         this.setState(() => ({
           user: userData.user
-        }), () => this.props.history.push('/dashboard'))
+        }), () => this.props.history.push(`/dashboard/${this.state.user.id}`))
       })
   }
 
   render() {
     return (
       <div id="app">
-        {this.state.user ? <Header /> : null}
+        {this.state.user ? <Header user={this.state.user} /> : null}
         <Switch>
           <Route
             path='/login'
@@ -85,7 +87,7 @@ class App extends React.Component {
             render={() => <Signup signupHandler={this.signupHandler} />}
           />
           <Route
-            path='/dashboard'
+            path='/dashboard/:id'
             render={() => {
               return this.state.user ?
                 <Dashboard user={this.state.user} />
