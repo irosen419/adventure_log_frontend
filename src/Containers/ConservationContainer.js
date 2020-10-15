@@ -17,7 +17,7 @@ function ConservationContainer(props) {
                 )}
             </div>
             <div id="iucn-info">
-                {props.selectedInfo() ? <p>{props.selectedInfo().replace(/(<([^>]+)>)/ig, '')}</p> : null}
+                {props.selectedInfo() ? <p>{props.selectedInfo().replace(/(<([^>]+)>)/ig, '')}</p> : <h3>Please wait while we load your conservation information</h3>}
             </div>
         </div>
     )
