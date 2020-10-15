@@ -1,8 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import AnimalShow from '../Components/AnimalShow'
-import SearchForm from '../Components/SearchForm'
+import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
+import ConservationContainer from './ConservationContainer'
 
 class EncounterShow extends React.Component {
 
@@ -10,7 +11,8 @@ class EncounterShow extends React.Component {
         encounter: "",
         animalInfo: "",
         animalId: "",
-        edit: false
+        edit: false,
+        selectedButton: 'Population Trend'
     }
 
     componentDidMount() {
@@ -34,15 +36,15 @@ class EncounterShow extends React.Component {
             .then(data => this.setState(() => ({ animalInfo: data.result[0] })))
     }
 
-    mapInfo = () => {
-        let array = []
-        for (let attr in this.state.animalInfo) {
-            if (attr !== 'species_id' && attr !== 'rationale' && attr !== 'taxonomicnotes' && attr !== 'usetrade') {
-                array.push(<AnimalShow title={attr} info={this.state.animalInfo[attr]} />)
-            }
-        }
-        return array
-    }
+    // mapInfo = () => {
+    //     let array = []
+    //     for (let attr in this.state.animalInfo) {
+    //         if (attr !== 'species_id' && attr !== 'rationale' && attr !== 'taxonomicnotes' && attr !== 'usetrade') {
+    //             array.push(<AnimalShow title={attr} info={this.state.animalInfo[attr]} />)
+    //         }
+    //     }
+    //     return array
+    // }
 
     deleteEncounter = () => {
         const encounterId = window.location.pathname.split('/')[2]
@@ -113,11 +115,36 @@ class EncounterShow extends React.Component {
     }
 
     mapImages = () => {
-        return this.state.encounter.encounter_images.record.photos.map(img_url => <img src={img_url} alt={localStorage.getItem("common_name")} />)
+        const photos = this.state.encounter.encounter_images.record.photos
+        return photos.map(img_url => <img key={photos.indexOf(img_url)} src={img_url} alt={localStorage.getItem("common_name")} />)
+    }
+
+    selectedButton = (e) => {
+        e.persist()
+        this.setState(() => ({ selectedButton: e.target.innerText }))
+    }
+
+    selectedInfo = () => {
+        if (this.state.selectedButton && this.state.animalInfo) {
+            let info = this.state.animalInfo
+            switch (this.state.selectedButton) {
+                case ('Population'):
+                    return info.population
+                case ('Population Trend'):
+                    return info.populationtrend
+                case ('Geographic Range'):
+                    return info.geographicrange
+                case ('Habitat'):
+                    return info.habitat
+                case ('Threats'):
+                    return info.threats
+                case ('Conservation Measures'):
+                    return info.conservationmeasures
+            }
+        }
     }
 
     render() {
-        console.log(this.state.encounter)
         return (
             <div id='encounter-main'>
                 <div id='encounter-info'>
@@ -125,16 +152,18 @@ class EncounterShow extends React.Component {
                     <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
                     <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
                     <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
-                    {this.state.animalInfo ? this.mapInfo() : <h3>Loading conservation information...</h3>}
+                    <ConservationContainer selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} />
                     {this.state.edit ? <div id='edit-form'>
                         <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
                         <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
                     </div>
                         : null}
-                    <button onClick={this.deleteEncounter}>Delete this encounter</button>
-                    <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
                 </div>
-                {this.state.encounter ? this.mapImages() : null}
+                <div id='image-grid'>
+                    {this.state.encounter ? this.mapImages() : null}
+                </div>
+                <button onClick={this.deleteEncounter}>Delete this encounter</button>
+                <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
             </div>
         )
     }

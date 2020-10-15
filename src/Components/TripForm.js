@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event'
 import React from 'react'
 
 class TripForm extends React.Component {
@@ -19,13 +20,19 @@ class TripForm extends React.Component {
         this.props.tripSubmitHandler(this.state)
     }
 
+    showButton = () => {
+        return window.location.pathname.split('/')[2] === this.props.user.id.toString() ?
+            <button onClick={() => { this.setState((previousState) => ({ form: !previousState.form })) }}>
+                Add a trip
+            </button>
+            : null
+    }
+
     render() {
         return (
             <div id="trip-form">
                 {this.state.form ? null :
-                    <button onClick={() => { this.setState((previousState) => ({ form: !previousState.form })) }}>
-                        Add a trip
-                    </button>
+                    this.showButton()
                 }
                 {this.state.form ?
                     <form onSubmit={this.submitHandler}>

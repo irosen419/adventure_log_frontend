@@ -1,8 +1,13 @@
 a {
   text-decoration: none;
+  color: black
 }
 a:visited {
   color: black
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 #header {
@@ -18,6 +23,27 @@ a:visited {
   font-size: larger;
   margin-left: 25px;
 }
+
+#header .user-search {
+  background-color: white;
+  font-size: x-large;
+  border: 1px solid 
+}
+
+#header ul a {
+  margin-left: 0;
+}
+
+ul {
+  position: absolute;
+  z-index: 5;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* .search-bar {
+  position: relative;
+} */
 
 #trip-map {
   height: 50%;
@@ -75,17 +101,49 @@ a:visited {
 }
 
 #encounter-main {
+  margin: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  max-width: 60vw
 }
+
+#encounter-main #image-grid {
+  margin: 35px 0 50px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 250px;
+}
+
+
 #encounter-main img{
-  margin: 5% auto 0 2%;
-  width: 400px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #encounter-info {
-  min-width: 50%;
-  max-width: 50%;
+  width: 100%;
+}
+
+#conservation {
+  margin: auto;
+
+}
+
+
+#iucn-info {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid;
+}
+
+#followings {
+  position: absolute;
+  top: 10%;
+  left: 2%;
+
+  z-index: 3;
 }

@@ -1,19 +1,19 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-class SearchForm extends React.Component {
+class UserSearchForm extends React.Component {
 
     state = {
         search: [],
-        animalsArray: [],
+        usersArray: [],
         suggestions: []
     }
 
     componentDidMount() {
-        this.fetchAnimals()
+        this.fetchUsers()
     }
 
-    fetchAnimals = () => {
+    fetchUsers = () => {
         const configObj = {
             method: 'GET',
             headers: {
@@ -23,33 +23,29 @@ class SearchForm extends React.Component {
             }
         }
 
-        fetch('http://localhost:3000/api/v1/animals', configObj)
+        fetch('http://localhost:3000/api/v1/users', configObj)
             .then(resp => resp.json())
-            .then(animals => this.setState(() => ({ animalsArray: animals })))
+            .then(users => this.setState(() => ({ usersArray: users.users })))
     }
 
     changeHandler = (e) => {
         e.persist()
         this.setState(() => ({ search: e.target.value }), () => {
-            let listOfAnimals = this.state.animalsArray
+            let listOfUsers = this.state.usersArray
             let suggestions = []
             if (this.state.search.length > 0) {
-                suggestions = listOfAnimals.filter(animal => animal.common_name.toLowerCase().includes(this.state.search.toLowerCase()))
+                suggestions = listOfUsers.filter(user => user.username.toLowerCase().includes(this.state.search.toLowerCase()))
             }
             this.setState(() => ({ suggestions: suggestions }))
         })
     }
 
-    clickHandler = (animal) => {
-        this.setState(() => ({
-            search: animal.common_name,
-            suggestions: []
-        }))
-        this.props.encounterAnimalHandler(animal)
-    }
 
-    mapAnimals = () => {
-        return this.state.suggestions.map(animal => <li key={animal.id} onClick={() => this.clickHandler(animal)}>{animal.common_name}</li>)
+    mapUsers = () => {
+        return this.state.suggestions.map(user => <a key={user.id} href={`/dashboard/${user.id}`}><li className="user-search" onClick={() => {
+            localStorage.setItem("username", user.username)
+            localStorage.setItem("userId", user.id)
+        }}>{user.username}</li></a>)
     }
 
     renderSuggestions = () => {
@@ -59,7 +55,7 @@ class SearchForm extends React.Component {
         } else {
             return (
                 <ul>
-                    {this.mapAnimals()}
+                    {this.mapUsers()}
                 </ul>
             )
         }
@@ -67,7 +63,7 @@ class SearchForm extends React.Component {
 
     render() {
         return (
-            <form id="search-bar">
+            <form className="search-bar">
                 <input type="text" name="search" placeholder="Search..." value={this.state.search} onChange={this.changeHandler} />
                 {this.renderSuggestions()}
             </form>
@@ -75,4 +71,4 @@ class SearchForm extends React.Component {
     }
 }
 
-export default withRouter(SearchForm)
+export default withRouter(UserSearchForm)

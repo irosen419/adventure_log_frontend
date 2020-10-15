@@ -38,7 +38,16 @@ class MapContainer extends React.Component {
 
 
     makeMarkers = () => {
-        return this.state.coordinatesArray.map(coord => <Marker name={coord.destination} title={coord.destination} id={coord.id} position={{ lat: coord.latitude, lng: coord.longitude }} onClick={() => this.props.history.push(`/trip/${coord.id}`)} />)
+        return this.state.coordinatesArray.map(coord =>
+            <Marker
+                key={this.state.coordinatesArray.indexOf(coord)}
+                name={coord.destination}
+                title={coord.destination}
+                id={coord.id}
+                position={{ lat: coord.latitude, lng: coord.longitude }}
+                onClick={() => this.props.history.push(`/trip/${coord.id}`)}
+            />
+        )
     }
 
     mapStyles = () => {
@@ -55,7 +64,7 @@ class MapContainer extends React.Component {
             <div id="trip-map">
                 <Map
                     google={this.props.google}
-                    zoom={1.25}
+                    zoom={1.5}
                     style={this.mapStyles()}
                     initialCenter={{ lat: 20, lng: 12 }}
                     mapType={window.google.maps.MapTypeId.SATELLITE}
