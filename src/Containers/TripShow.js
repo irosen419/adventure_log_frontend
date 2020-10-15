@@ -1,7 +1,7 @@
 import React from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
-import SearchForm from '../Components/SearchForm'
+import AnimalSearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
 import { NavLink, withRouter } from 'react-router-dom'
 
@@ -131,7 +131,7 @@ class TripShow extends React.Component {
     renderForm = () => {
         return (
             <div>
-                <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
+                <AnimalSearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
                 <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
             </div>
         )

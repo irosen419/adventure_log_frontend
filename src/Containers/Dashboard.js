@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         let userId = window.location.pathname.split('/')[2]
-
+        localStorage.setItem("userId", userId)
         let options = {
             method: 'GET',
             headers: {
@@ -71,13 +71,15 @@ class Dashboard extends React.Component {
     }
 
     checkFollowing = () => {
-        return this.props.followings.find(user => user.username === localStorage.getItem("username"))
+        return this.props.followings.find(user => user.id.toString() === localStorage.getItem("userId"))
     }
 
     followButton = () => {
-        return this.checkFollowing() ?
-            <a href={`/dashboard/${this.props.user.id}`}><button onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
-            : <button onClick={(e) => this.props.friendHandler(e)}>Follow</button>
+        if (this.checkFollowing()) {
+            return <a href={`/dashboard/${this.props.user.id}`}><button onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
+        } else {
+            return <button onClick={(e) => this.props.friendHandler(e)}>Follow</button>
+        }
     }
 
     render() {

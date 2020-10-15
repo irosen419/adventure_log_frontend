@@ -92,7 +92,7 @@ class App extends React.Component {
   friend = (options) => {
     fetch(`http://localhost:3000/api/v1/friendship`, options)
       .then(resp => resp.json())
-      .then((user) => this.setState((previousState) => ({ currentUserFollowings: [...previousState.currentUserFollowings, user] })))
+      .then((user) => this.setState((previousState) => ({ currentUserFollowings: [...previousState.currentUserFollowings, user.user] })))
   }
 
   unfriend = (options, followingId) => {
@@ -128,7 +128,6 @@ class App extends React.Component {
 
   render() {
     { this.checkForUser() }
-    console.log(this.state.currentUserFollowings)
     return (
       <div id="app">
         {this.state.user ? <Header user={this.state.user} /> : null}
