@@ -36,16 +36,6 @@ class EncounterShow extends React.Component {
             .then(data => this.setState(() => ({ animalInfo: data.result[0] })))
     }
 
-    // mapInfo = () => {
-    //     let array = []
-    //     for (let attr in this.state.animalInfo) {
-    //         if (attr !== 'species_id' && attr !== 'rationale' && attr !== 'taxonomicnotes' && attr !== 'usetrade') {
-    //             array.push(<AnimalShow title={attr} info={this.state.animalInfo[attr]} />)
-    //         }
-    //     }
-    //     return array
-    // }
-
     deleteEncounter = () => {
         const encounterId = window.location.pathname.split('/')[2]
         const options = {

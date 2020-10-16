@@ -22,6 +22,7 @@ a:hover {
 #header a {
   font-size: larger;
   margin-left: 25px;
+  background-color: brown;
 }
 
 #header .user-search {
@@ -130,14 +131,29 @@ ul {
 
 #conservation {
   margin: auto;
-
 }
-
 
 #iucn-info {
   width: 100%;
   min-height: 150px;
   border: 1px solid;
+}
+
+#iucn-info div.cFtQnK {
+  position: relative;
+  top: 5rem;
+}
+
+div#grid-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#grid-header button {
+  width: 16%;
+  height: 40px;
+  font-size: medium;
 }
 
 #followings {
@@ -147,3 +163,4 @@ ul {
 
   z-index: 3;
 }
+
