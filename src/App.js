@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom'
-import Header from './Components/Header'
+import Navbar from './Components/Navbar'
 import Dashboard from './Containers/Dashboard'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import TripShow from './Containers/TripShow'
 import EncounterShow from './Containers/EncounterShow'
-
-
 import './App.css';
+
+
 class App extends React.Component {
 
   state = {
@@ -126,11 +126,15 @@ class App extends React.Component {
     e.target.innerText === 'Follow' ? this.friend(options) : this.unfriend(options, followingId)
   }
 
+  logout = () => {
+    this.setState(() => ({ user: "" }))
+  }
+
   render() {
     { this.checkForUser() }
     return (
       <div id="app">
-        {this.state.user ? <Header user={this.state.user} /> : null}
+        {this.state.user ? <Navbar user={this.state.user} logout={this.logout} /> : null}
         <Switch>
           <Route
             path='/login'
