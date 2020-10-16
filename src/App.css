@@ -108,7 +108,10 @@ ul {
   justify-content: center;
   align-items: center;
 
-  max-width: 60vw
+  max-width: 60vw;
+
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
 }
 
 #encounter-main #image-grid {
@@ -134,14 +137,41 @@ ul {
 }
 
 #iucn-info {
-  width: 100%;
-  min-height: 150px;
+  width: 90%;
+  min-height: 200px;
+  max-height: 200px;
+
+  margin: auto;
+  padding: 0 10px 0 15px;
+
+  background-color: rgb(218, 140, 140);
   border: 1px solid;
+
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+#inner-info, #population-headers {
+  display: flex;
+}
+
+#population-headers {
+  margin-top: 3%;
+  margin-left: -350px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#iucn-info img {
+  object-fit: contain;
+  height: 145px;
+  margin-top: 2.5%;
+  margin-left: -20%; 
 }
 
 #iucn-info div.cFtQnK {
   position: relative;
-  top: 5rem;
+  top: 6rem;
 }
 
 div#grid-header {
@@ -151,7 +181,7 @@ div#grid-header {
 }
 
 div#grid-header button {
-  width: 16%;
+  width: 15%;
   height: 40px;
   font-size: medium;
 }

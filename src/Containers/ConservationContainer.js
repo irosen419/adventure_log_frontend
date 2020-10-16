@@ -1,10 +1,38 @@
 import React from 'react'
 import CategoryCard from '../Components/CategoryCard'
+import DownArrow from '../images/down_arrow.png'
+import UpArrow from '../images/up_arrow.png'
 import { Loading } from 'react-loading-dot'
 
 function ConservationContainer(props) {
 
-    const categories = ['Population', 'Population Trend', 'Geographic Range', 'Habitat', 'Threats', 'Conservation Measures']
+    const categories = ['Population Trend', 'Population', 'Geographic Range', 'Habitat', 'Threats', 'Conservation Measures']
+
+    const showDecreasing = (props) => {
+        if (props.selectedInfo() === 'decreasing') {
+            return (
+                <div id="inner-info">
+                    <img src={DownArrow} alt='decreasing' />
+                    <div id="population-headers">
+                        <h3>{localStorage.getItem("common_name")} populations are</h3>
+                        <h2>decreasing</h2>
+                    </div>
+                </div>
+            )
+        } else if (props.selectedInfo() === 'increasing') {
+            return (
+                <div id="inner-info">
+                    <img src={UpArrow} alt='increasing' />
+                    <div id="population-headers">
+                        <h3>{localStorage.getItem("common_name")} populations are</h3>
+                        <h2>increasing</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return <p>{props.selectedInfo().replace(/(<([^>]+)>)/ig, '')}</p>
+        }
+    }
 
     return (
         <div id="conservation">
@@ -18,7 +46,7 @@ function ConservationContainer(props) {
                 )}
             </div>
             <div id="iucn-info">
-                {props.selectedInfo() ? <p>{props.selectedInfo().replace(/(<([^>]+)>)/ig, '')}</p> : <Loading />}
+                {props.selectedInfo() ? showDecreasing(props) : <Loading />}
             </div>
         </div>
     )//<h3>Please wait while we load your conservation information</h3> 
