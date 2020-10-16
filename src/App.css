@@ -101,6 +101,16 @@ ul {
   max-height: 25vw;
 }
 
+#trip #encounters img {
+  width: 200px;
+  object-fit: cover;
+}
+
+#trip #encounters h1 {
+  margin-right: 0;
+  width: fit-content;
+}
+
 #encounter-main {
   margin: auto;
   display: flex;
@@ -169,7 +179,7 @@ ul {
   margin-left: -20%; 
 }
 
-#iucn-info div.cFtQnK {
+div.cFtQnK, div.jzgFlE, div.egJpal, div.fyudsR {
   position: relative;
   top: 6rem;
 }

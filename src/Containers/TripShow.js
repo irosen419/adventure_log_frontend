@@ -77,7 +77,7 @@ class TripShow extends React.Component {
                 localStorage.setItem("common_name", encounter.animal_common_name)
                 localStorage.setItem("tripId", this.state.trip.id)
                 localStorage.setItem("tripName", this.state.trip.destination)
-            }}>{encounter.animal_common_name}</h1></NavLink>)
+            }}>{encounter.animal_common_name}</h1>{encounter.encounter_images.record.photos[0] ? <img src={encounter.encounter_images.record.photos[0]} alt={encounter.animal_common_name} /> : null}</NavLink>)
         })
     }
 
