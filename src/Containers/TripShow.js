@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
 import AnimalSearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
+import EncounterCard from '../Components/EncounterCard'
 import { NavLink, withRouter } from 'react-router-dom'
 
 class TripShow extends React.Component {
@@ -72,12 +73,13 @@ class TripShow extends React.Component {
 
     mapEncounters = () => {
         return this.state.encounterArray.map(encounter => {
-            return (<NavLink to={`/encounter/${encounter.id}`}><h1 onClick={() => {
-                localStorage.setItem("sci_name", encounter.animal_scientific_name)
-                localStorage.setItem("common_name", encounter.animal_common_name)
-                localStorage.setItem("tripId", this.state.trip.id)
-                localStorage.setItem("tripName", this.state.trip.destination)
-            }}>{encounter.animal_common_name}</h1>{encounter.encounter_images.record.photos[0] ? <img src={encounter.encounter_images.record.photos[0]} alt={encounter.animal_common_name} /> : null}</NavLink>)
+            return (<NavLink to={`/encounter/${encounter.id}`}>
+                <EncounterCard encounter={encounter} onClick={() => {
+                    localStorage.setItem("sci_name", encounter.animal_scientific_name)
+                    localStorage.setItem("common_name", encounter.animal_common_name)
+                    localStorage.setItem("tripId", this.state.trip.id)
+                    localStorage.setItem("tripName", this.state.trip.destination)
+                }} /></NavLink>)
         })
     }
 

@@ -46,6 +46,7 @@ class MapContainer extends React.Component {
                 id={coord.id}
                 position={{ lat: coord.latitude, lng: coord.longitude }}
                 onClick={() => this.props.history.push(`/trip/${coord.id}`)}
+                icon={{ url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" }}
             />
         )
     }
