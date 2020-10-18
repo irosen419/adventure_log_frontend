@@ -1,7 +1,8 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
+import EncounterCard from '../Components/EncounterCard';
 
 class Hub extends React.Component {
 
@@ -47,8 +48,24 @@ class Hub extends React.Component {
             </div>
             :
             <div id="list">
-                {/* {console.log(this.state.allTripsArray.map(trip => trip.my_encounters).flat())} */}
+                {this.listEncounters()}
             </div>
+    }
+
+    listEncounters = () => {
+        const encounters = this.state.allTripsArray.map(trip => trip.my_encounters).flat()
+        return encounters.map(encounter =>
+            <Link to={`/encounter/${encounter.id}`} onClick={() => {
+                localStorage.setItem("sci_name", encounter.animal_scientific_name)
+                localStorage.setItem("common_name", encounter.animal_common_name)
+                localStorage.setItem("userId", encounter.user_id)
+                localStorage.setItem("tripId", encounter.trip_id)
+                localStorage.setItem("username", encounter.username)
+                localStorage.setItem("tripName", encounter.destination)
+            }}>
+                <EncounterCard encounter={encounter} />
+            </Link>
+        )
     }
 
     mapTrips = (tripsArray) => {
