@@ -10,7 +10,8 @@ class Hub extends React.Component {
         mapOrList: true,
         allTripsArray: [],
         coordinatesArray: [],
-        markersArray: []
+        markersArray: [],
+        filterType: "All"
     }
 
     componentDidUpdate(pP, pS) {
@@ -149,6 +150,20 @@ class Hub extends React.Component {
             }
         }
     }
+
+    filterTripsandEncounters = () => {
+        if (this.state.mapOrList) {
+
+        } else {
+
+        }
+    }
+
+    changeHandler = (e) => {
+        e.persist()
+        this.setState(() => ({ filterType: e.target.value }))
+    }
+
     mapStyles = () => {
         return {
             height: '70%',
@@ -159,13 +174,19 @@ class Hub extends React.Component {
     }
 
     render() {
-        console.log(this.state.allTripsArray)
         return (
             <div id='hub' >
                 { this.state.allTripsArray ?
-                    <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
-                        {this.state.mapOrList ? 'List View' : 'Map View'}
-                    </button>
+                    <>
+                        <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
+                            {this.state.mapOrList ? 'List View' : 'Map View'}
+                        </button>
+                        <select onChange={this.changeHandler}>
+                            <option>All trips</option>
+                            <option>Friends' trips</option>
+                            <option>My trips</option>
+                        </select>
+                    </>
                     : null
                 }
                 { this.state.allTripsArray ? this.renderHub() : null}
