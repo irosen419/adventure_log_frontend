@@ -79,13 +79,6 @@ class EncounterShow extends React.Component {
                 formData.append(`encounter[images][${i}]`, files[i])
             }
         }
-        // console.log(this.state.animalId, note)
-        // let editObj = {}
-
-        // if (this.state.animalId) { editObj.animal_id = this.state.animalId }
-        // if (note.time_of_day) { editObj.time_of_day = note.time_of_day }
-        // if (note.weather_conditions) { editObj.weather_conditions = note.weather_conditions }
-        // if (note.notes) { editObj.notes = note.notes }
 
         const options = {
             method: 'PATCH',
