@@ -280,7 +280,7 @@ div#grid-header button {
   grid-gap: 25px;
 }
 
-.encounter-card {
+#encounters-list .encounter-card {
   height: 300px;
   width: 300px;
 
@@ -288,13 +288,13 @@ div#grid-header button {
   text-align: center;
 }
 
-.encounter-card img{
+#encounters-list .encounter-card img{
   width:100%;
   height: 100%;
   object-fit: cover;
 }
 
-.encounter-card div{
+#encounters-list .encounter-card div{
   position: absolute;
   top: 50%;
   left: 50%;
