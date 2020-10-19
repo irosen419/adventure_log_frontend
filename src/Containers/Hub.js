@@ -11,7 +11,8 @@ class Hub extends React.Component {
         allTripsArray: [],
         coordinatesArray: [],
         markersArray: [],
-        filterType: "All"
+        filterType: "All Adventures",
+        filteredArray: []
     }
 
     componentDidUpdate(pP, pS) {
@@ -49,12 +50,18 @@ class Hub extends React.Component {
             </div>
             :
             <div id="list">
+                <select onChange={this.changeHandler}>
+                    <option value='All Adventures'>All Adventures</option>
+                    <option value="Friends' Adventures">Friends' Adventures</option>
+                    <option value="My Adventures">My Adventures</option>
+                </select>
                 {this.listEncounters()}
             </div>
     }
 
     listEncounters = () => {
-        const encounters = this.state.allTripsArray.map(trip => trip.my_encounters).flat()
+
+        const encounters = this.state.filteredArray.map(trip => trip.my_encounters).flat()
         return encounters.map(encounter =>
             <Link to={`/encounter/${encounter.id}`} onClick={() => {
                 localStorage.setItem("sci_name", encounter.animal_scientific_name)
@@ -82,7 +89,7 @@ class Hub extends React.Component {
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
 
-                return ({ id: trip.id, user_id: trip.user_id, username: trip.my_user, destination: trip.destination, latitude: lat, longitude: lng })
+                return ({ id: trip.id, user_id: trip.user_id, username: trip.my_user, destination: trip.destination, latitude: lat, longitude: lng, encounter_num: trip.my_encounters.length })
             },
             error => {
                 console.error(error);
@@ -102,7 +109,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal encounters\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -152,16 +159,34 @@ class Hub extends React.Component {
     }
 
     filterTripsandEncounters = () => {
-        if (this.state.mapOrList) {
-
-        } else {
+        let filteredArray = []
+        let followingsTripsIds = this.props.followings.map(following => following.id)
+        switch (this.state.filterType) {
+            case ("All Adventures"):
+                console.log("there")
+                filteredArray = this.state.allTripsArray
+                break
+            case ("Friends' Adventures"):
+                console.log("here")
+                console.log(this.state.filterType)
+                filteredArray = this.state.allTripsArray.filter(trip => followingsTripsIds.includes(trip.user_id))
+                break
+            case ("My Adventures"):
+                console.log("poop")
+                filteredArray = this.state.allTripsArray.filter(trip => trip.user_id === this.props.user.id)
+                break
+            default:
+                debugger
+                filteredArray = this.state.allTripsArray
 
         }
+
+        this.setState(() => ({ filteredArray: filteredArray }))
     }
 
     changeHandler = (e) => {
         e.persist()
-        this.setState(() => ({ filterType: e.target.value }))
+        this.setState(() => ({ filterType: e.target.value }), () => this.filterTripsandEncounters())
     }
 
     mapStyles = () => {
@@ -181,11 +206,7 @@ class Hub extends React.Component {
                         <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
                             {this.state.mapOrList ? 'List View' : 'Map View'}
                         </button>
-                        <select onChange={this.changeHandler}>
-                            <option>All trips</option>
-                            <option>Friends' trips</option>
-                            <option>My trips</option>
-                        </select>
+
                     </>
                     : null
                 }
