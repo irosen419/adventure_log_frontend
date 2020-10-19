@@ -38,8 +38,14 @@ class PhotoInput extends React.Component {
     render() {
         return (
             <form onSubmit={this.submitHandler}>
-                <input type="file" multiple name="photos" accept="image/*" onChange={this.pictureHandler} />
-                <input type="submit" value="Submit" />
+                <input id="photo-add"
+                    hidden type="file"
+                    multiple name="photos"
+                    accept="image/*"
+                    onChange={this.pictureHandler}
+                />
+                <label id="photo-add-label" for="photo-add">Click here to add photos</label>
+                <input type="submit" value="Submit Photos" />
             </form>
         )
     }

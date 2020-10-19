@@ -182,8 +182,8 @@ class EncounterShow extends React.Component {
                     {this.state.encounter ? this.mapImages() : null}
                 </div>
                 <PhotoInput encounterPhotoHandler={this.encounterPhotoHandler} />
-                <button onClick={this.deleteEncounter}>Delete this encounter</button>
                 <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
+                <button onClick={this.deleteEncounter}>Delete this encounter</button>
             </div>
         )
     }
