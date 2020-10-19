@@ -43,11 +43,12 @@ class EncounterForm extends React.Component {
             }
         }
         this.setState(() => ({
-            photos: [fileArray, ...this.state.photos].flat()
+            photos: fileArray
         }))
     }
 
     render() {
+        console.log(this.state.photo_URLs)
         return (
             <form onSubmit={this.submitHandler}>
                 <select name="time_of_day" value={this.state.time_of_day} onChange={this.changeHandler}>

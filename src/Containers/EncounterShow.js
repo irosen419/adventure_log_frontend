@@ -132,14 +132,15 @@ class EncounterShow extends React.Component {
     }
 
     render() {
+        console.log(this.state.encounter)
         return (
             <div id='encounter-main'>
                 <div id='encounter-info'>
-                    <h1>{localStorage.getItem("common_name")}</h1>
+                    <h1>{this.state.encounter ? this.state.encounter.animal_common_name : null}</h1>
                     <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
                     <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
                     <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
-                    <ConservationContainer selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} />
+                    {this.state.encounter ? <ConservationContainer encounter={this.state.encounter} selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} /> : null}
                     {this.state.edit ? <div id='edit-form'>
                         <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
                         <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />

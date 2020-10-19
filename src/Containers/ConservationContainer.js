@@ -14,7 +14,7 @@ function ConservationContainer(props) {
                 <div id="inner-info">
                     <img src={DownArrow} alt='decreasing' />
                     <div id="population-headers">
-                        <h3>{localStorage.getItem("common_name")} populations are</h3>
+                        <h3>{props.encounter.animal_common_name} populations are</h3>
                         <h2>decreasing</h2>
                     </div>
                 </div>
@@ -24,7 +24,7 @@ function ConservationContainer(props) {
                 <div id="inner-info">
                     <img src={UpArrow} alt='increasing' />
                     <div id="population-headers">
-                        <h3>{localStorage.getItem("common_name")} populations are</h3>
+                        <h3>{props.encounter.animal_common_name} populations are</h3>
                         <h2>increasing</h2>
                     </div>
                 </div>
