@@ -103,13 +103,14 @@ class Hub extends React.Component {
         } else {
             let followingsTripsIds = this.props.followings.map(following => following.id)
             let coordinates = []
+            let pluralize = require('pluralize')
             for (const coord of this.state.coordinatesArray) {
                 if (coord.user_id === this.props.user.id) {
                     coordinates.push(
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -124,7 +125,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -140,7 +141,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
