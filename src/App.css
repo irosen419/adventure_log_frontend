@@ -183,6 +183,9 @@ span {
 
 #encounter-main {
   position: relative;
+  overflow-y: hidden;
+  overflow: scroll;
+  height: 100vh;
   /* margin: auto; */
   /* width: 100vw; */
   /* display: flex;

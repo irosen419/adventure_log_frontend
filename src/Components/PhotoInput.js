@@ -10,6 +10,7 @@ class PhotoInput extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.encounterPhotoHandler(this.state.photos)
+        this.setState(() => ({ photo_URLs: [] }))
     }
 
     pictureHandler = (e) => {
@@ -27,11 +28,10 @@ class PhotoInput extends React.Component {
                 fileReader.onloadend = () => {
                     this.setState(() => ({
                         photo_URLs: [fileReader.result, ...this.state.photo_URLs]
-                    }), () => this.setState(() => ({ photo_URLs: [] })))
+                    }))
                 }
             }
         })
-        console.log(fileArray)
         this.setState(() => ({
             photos: fileArray
         }))
