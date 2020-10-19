@@ -32,7 +32,10 @@ class Hub extends React.Component {
         }
         fetch(`http://localhost:3000/api/v1/trips`, options)
             .then(resp => resp.json())
-            .then(trips => this.setState(() => ({ allTripsArray: trips.trips })))
+            .then(trips => this.setState(() => ({
+                allTripsArray: trips.trips,
+                filteredArray: trips.trips
+            })))
     }
 
     renderHub = () => {
@@ -61,7 +64,12 @@ class Hub extends React.Component {
 
     listEncounters = () => {
 
-        const encounters = this.state.filteredArray.map(trip => trip.my_encounters).flat()
+        let encounters = this.state.filteredArray.map(trip => trip.my_encounters).flat()
+        encounters = encounters.sort(function (a, b) {
+            if (a.animal_common_name < b.animal_common_name) { return -1; }
+            if (a.animal_common_name > b.animal_common_name) { return 1; }
+            return 0;
+        })
         return encounters.map(encounter =>
             <Link to={`/encounter/${encounter.id}`} onClick={() => {
                 localStorage.setItem("sci_name", encounter.animal_scientific_name)
