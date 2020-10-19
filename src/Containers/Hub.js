@@ -109,7 +109,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal encounters\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -124,7 +124,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -140,7 +140,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n\n${coord.username}`}
+                            title={`${coord.destination}\n${coord.encounter_num} animal encounter(s)\n${coord.username}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
