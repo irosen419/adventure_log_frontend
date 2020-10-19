@@ -2,7 +2,9 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
+import PhotoInput from '../Components/PhotoInput'
 import ConservationContainer from './ConservationContainer'
+import * as AiIcons from 'react-icons/ai'
 
 class EncounterShow extends React.Component {
 
@@ -67,29 +69,25 @@ class EncounterShow extends React.Component {
 
     encounterNotesHandler = (note) => {
         const encounterId = window.location.pathname.split('/')[2]
-        // let formData = new FormData()
+        let formData = new FormData()
 
-        // if (this.state.animalId) { formData.append('encounter[animal_id]', this.state.animalId) }
-        // if (note.time_of_day) { formData.append('encounter[time_of_day]', note.time_of_day) }
-        // if (note.weather_conditions) { formData.append('encounter[weather_conditions]', note.weather_conditions) }
-        // if (note.notes) { formData.append('encounter[notes]', note.notes) }
-        // if (note.photo) { formData.append('encounter[photo]', note.photo) }
-
-        let editObj = {}
-
-        if (this.state.animalId) { editObj.animal_id = this.state.animalId }
-        if (note.time_of_day) { editObj.time_of_day = note.time_of_day }
-        if (note.weather_conditions) { editObj.weather_conditions = note.weather_conditions }
-        if (note.notes) { editObj.notes = note.notes }
+        if (this.state.animalId) { formData.append('encounter[animal_id]', this.state.animalId) }
+        if (note.time_of_day) { formData.append('encounter[time_of_day]', note.time_of_day) }
+        if (note.weather_conditions) { formData.append('encounter[weather_conditions]', note.weather_conditions) }
+        if (note.notes) { formData.append('encounter[notes]', note.notes) }
+        if (note.photos) {
+            const files = note.photos;
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`encounter[images][${i}]`, files[i])
+            }
+        }
 
         const options = {
             method: 'PATCH',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`,
-                'Content-type': 'application/json',
-                'Accepts': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
             },
-            body: JSON.stringify(editObj)
+            body: formData
         }
 
         fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
@@ -99,6 +97,36 @@ class EncounterShow extends React.Component {
                 this.setState(() => ({
                     encounter: encounter.encounter,
                     edit: false
+                }), () => this.fetchAnimalInfo())
+            })
+    }
+
+    encounterPhotoHandler = (photos) => {
+        const encounterId = window.location.pathname.split('/')[2]
+        let formData = new FormData()
+
+        if (photos) {
+            const files = photos;
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`encounter[images][${i}]`, files[i])
+            }
+        }
+
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+            body: formData
+        }
+        console.log("Photos: ", photos)
+
+        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}/photos`, options)
+            .then(resp => resp.json())
+            .then((encounter) => {
+                console.log("ENCOUNTER", encounter)
+                this.setState(() => ({
+                    encounter: encounter.encounter
                 }), () => this.fetchAnimalInfo())
             })
     }
@@ -136,25 +164,36 @@ class EncounterShow extends React.Component {
     }
 
     render() {
+        console.log(this.state.encounter)
         return (
             <div id='encounter-main'>
-                <div id='encounter-info'>
-                    <h1>{localStorage.getItem("common_name")}</h1>
-                    <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
-                    <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
-                    <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
-                    <ConservationContainer selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} />
-                    {this.state.edit ? <div id='edit-form'>
-                        <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
-                        <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
+                <div id="inner-encounter">
+                    <div id='encounter-info'>
+                        <h1>{this.state.encounter ? this.state.encounter.animal_common_name : null}</h1>
+                        <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
+                        <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
+                        <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
+                        {this.state.encounter ? <ConservationContainer encounter={this.state.encounter} selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} /> : null}
+
+                        <div id='image-grid'>
+                            {this.state.encounter ? this.mapImages() : null}
+                        </div>
+                        <PhotoInput encounterPhotoHandler={this.encounterPhotoHandler} />
+                        <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
+                        <button onClick={this.deleteEncounter}>Delete this encounter</button>
                     </div>
-                        : null}
+                    {
+                        this.state.edit ?
+                            <div id='edit-form'>
+                                <div id='inner-form'>
+                                    <span onClick={() => this.setState(() => ({ edit: false }))}><AiIcons.AiOutlineClose /></span>
+                                    <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
+                                    <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
+                                </div>
+                            </div>
+                            : null
+                    }
                 </div>
-                <div id='image-grid'>
-                    {this.state.encounter ? this.mapImages() : null}
-                </div>
-                <button onClick={this.deleteEncounter}>Delete this encounter</button>
-                <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
             </div>
         )
     }

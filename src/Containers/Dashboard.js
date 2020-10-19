@@ -86,10 +86,10 @@ class Dashboard extends React.Component {
         return (
             <div id="dashboard">
                 {this.props.user.id.toString() !== window.location.pathname.split('/')[2] ? this.followButton() : null}
-                <div id='followings'>
+                {/* <div id='followings'>
                     <h2>{localStorage.getItem("username")} is following</h2>
                     {this.state.followingsArray}
-                </div>
+                </div> */}
                 {this.state.tripsArray ? <MapContainer user={this.props.user} trips={this.state.tripsArray} /> : null}
                 <TripForm tripSubmitHandler={this.tripSubmitHandler} user={this.props.user} />
                 {this.state.tripsArray.length > 0 ? <TripContainer user={this.props.user} trips={this.state.tripsArray} /> : null}

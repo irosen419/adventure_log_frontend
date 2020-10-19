@@ -38,30 +38,6 @@ class Hub extends React.Component {
             })))
     }
 
-    renderHub = () => {
-        return this.state.mapOrList ?
-            <div id="map">
-                <Map
-                    google={this.props.google}
-                    zoom={1.5}
-                    style={this.mapStyles()}
-                    initialCenter={{ lat: 20, lng: 12 }}
-                    mapType={window.google.maps.MapTypeId.SATELLITE}
-                >
-                    {this.state.markersArray.length > 0 ? this.state.markersArray : null}
-                </Map >
-            </div>
-            :
-            <div id="list">
-                <select onChange={this.changeHandler}>
-                    <option value='All Adventures'>All Adventures</option>
-                    <option value="Friends' Adventures">Friends' Adventures</option>
-                    <option value="My Adventures">My Adventures</option>
-                </select>
-                {this.listEncounters()}
-            </div>
-    }
-
     listEncounters = () => {
 
         let encounters = this.state.filteredArray.map(trip => trip.my_encounters).flat()
@@ -207,16 +183,39 @@ class Hub extends React.Component {
         };
     }
 
+    renderHub = () => {
+        return this.state.mapOrList ?
+            <div id="map">
+                <Map
+                    google={this.props.google}
+                    zoom={1.5}
+                    style={this.mapStyles()}
+                    initialCenter={{ lat: 20, lng: 12 }}
+                    mapType={window.google.maps.MapTypeId.SATELLITE}
+                >
+                    {this.state.markersArray.length > 0 ? this.state.markersArray : null}
+                </Map >
+            </div>
+            :
+            <div id="list">
+                <select onChange={this.changeHandler}>
+                    <option value='All Adventures'>All Adventures</option>
+                    <option value="Friends' Adventures">Friends' Adventures</option>
+                    <option value="My Adventures">My Adventures</option>
+                </select>
+                <div id="encounters-list">
+                    {this.listEncounters()}
+                </div>
+            </div>
+    }
+
     render() {
         return (
             <div id='hub' >
                 { this.state.allTripsArray ?
-                    <>
-                        <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
-                            {this.state.mapOrList ? 'List View' : 'Map View'}
-                        </button>
-
-                    </>
+                    <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
+                        {this.state.mapOrList ? 'List View' : 'Map View'}
+                    </button>
                     : null
                 }
                 { this.state.allTripsArray ? this.renderHub() : null}

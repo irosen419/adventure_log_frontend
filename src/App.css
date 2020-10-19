@@ -6,6 +6,7 @@ a:visited {
   color: black
 }
  */
+
 a:hover {
   cursor: pointer;
 }
@@ -163,9 +164,11 @@ span {
 }
 
 #trip #flex #location-map div:first-child {
+  position: absolute;
   margin-left: 0;
   max-width: 45vw;
   max-height: 25vw;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #trip #encounters img {
@@ -179,12 +182,29 @@ span {
 }
 
 #encounter-main {
-  margin: auto;
-  display: flex;
+  position: relative;
+  overflow-y: hidden;
+  overflow: scroll;
+  height: 100vh;
+  /* margin: auto; */
+  /* width: 100vw; */
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  max-width: 60vw;
+
+  font-family: 'EB Garamond', serif;
+  font-size: 20px; */
+}
+
+#inner-encounter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
   max-width: 60vw;
 
   font-family: 'EB Garamond', serif;
@@ -199,7 +219,7 @@ span {
 }
 
 
-#encounter-main img{
+#encounter-main #image-grid img{
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -233,20 +253,24 @@ span {
 }
 
 #population-headers {
-  margin-top: 3%;
-  margin-left: -350px;
+  margin-top: 10%;
+  margin-left: 50px;
   flex-direction: column;
   align-items: center;
+}
+
+#inner-info {
+  width: fit-content;
+  margin: auto;
 }
 
 #iucn-info img {
   object-fit: contain;
   height: 145px;
   margin-top: 2.5%;
-  margin-left: -20%; 
 }
 
-div.cFtQnK, div.jzgFlE, div.egJpal, div.fyudsR {
+div.cFtQnK, div.jzgFlE, div.egJpal, div.fyudsR, div.eTkkyF, div.imUfQn {
   position: relative;
   top: 6rem;
 }
@@ -263,11 +287,98 @@ div#grid-header button {
   font-size: medium;
 }
 
+#preview-flex {
+  display: flex;
+  width: fit-content;
+}
+
+img.image-preview {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+/* 
 #followings {
   position: absolute;
   top: 10%;
   left: 2%;
 
   z-index: 3;
+} */
+
+/*HUB*/
+
+#hub #encounters-list {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  grid-template-rows: 300px;
+  grid-gap: 25px;
+  width: fit-content;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow: scroll;
+  margin: auto;
 }
 
+/* #encounter-list {
+  margin: auto;
+} */
+
+#encounters-list .encounter-card {
+  height: 300px;
+  width: 300px;
+
+  position: relative;
+  text-align: center;
+}
+
+#encounters-list .encounter-card img{
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#encounters-list .encounter-card div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*FORMS*/
+
+#edit-form {
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(175, 27, 27, 0.75);
+}
+
+#edit-form span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: larger;
+}
+
+#edit-form span:hover {
+  cursor: pointer;
+}
+
+#inner-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 100px;
+
+  background-color: rgb(255, 255, 255, 1.0);
+
+  display: flex;
+
+}
