@@ -48,7 +48,6 @@ class EncounterForm extends React.Component {
     }
 
     render() {
-        console.log(this.state.photo_URLs)
         return (
             <form onSubmit={this.submitHandler}>
                 <select name="time_of_day" value={this.state.time_of_day} onChange={this.changeHandler}>

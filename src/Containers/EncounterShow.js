@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
+import PhotoInput from '../Components/PhotoInput'
 import ConservationContainer from './ConservationContainer'
 
 class EncounterShow extends React.Component {
@@ -99,6 +100,36 @@ class EncounterShow extends React.Component {
             })
     }
 
+    encounterPhotoHandler = (photos) => {
+        const encounterId = window.location.pathname.split('/')[2]
+        let formData = new FormData()
+
+        if (photos) {
+            const files = photos;
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`encounter[images][${i}]`, files[i])
+            }
+        }
+
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+            body: formData
+        }
+        console.log("Photos: ", photos)
+
+        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}/photos`, options)
+            .then(resp => resp.json())
+            .then((encounter) => {
+                console.log("ENCOUNTER", encounter)
+                this.setState(() => ({
+                    encounter: encounter.encounter
+                }), () => this.fetchAnimalInfo())
+            })
+    }
+
     mapImages = () => {
         const photos = this.state.encounter.encounter_images.record.photos
         return photos.map(img_url => <img key={photos.indexOf(img_url)} src={img_url} alt={localStorage.getItem("common_name")} />)
@@ -150,6 +181,7 @@ class EncounterShow extends React.Component {
                 <div id='image-grid'>
                     {this.state.encounter ? this.mapImages() : null}
                 </div>
+                <PhotoInput encounterPhotoHandler={this.encounterPhotoHandler} />
                 <button onClick={this.deleteEncounter}>Delete this encounter</button>
                 <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
             </div>
