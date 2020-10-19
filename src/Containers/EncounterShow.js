@@ -4,6 +4,7 @@ import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
 import PhotoInput from '../Components/PhotoInput'
 import ConservationContainer from './ConservationContainer'
+import * as AiIcons from 'react-icons/ai'
 
 class EncounterShow extends React.Component {
 
@@ -166,24 +167,33 @@ class EncounterShow extends React.Component {
         console.log(this.state.encounter)
         return (
             <div id='encounter-main'>
-                <div id='encounter-info'>
-                    <h1>{this.state.encounter ? this.state.encounter.animal_common_name : null}</h1>
-                    <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
-                    <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
-                    <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
-                    {this.state.encounter ? <ConservationContainer encounter={this.state.encounter} selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} /> : null}
-                    {this.state.edit ? <div id='edit-form'>
-                        <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
-                        <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
+                <div id="inner-encounter">
+                    <div id='encounter-info'>
+                        <h1>{this.state.encounter ? this.state.encounter.animal_common_name : null}</h1>
+                        <div>{this.state.encounter ? this.state.encounter.time_of_day : null}</div>
+                        <div>{this.state.encounter ? this.state.encounter.weather_conditions : null}</div>
+                        <div>{this.state.encounter ? this.state.encounter.notes : null}</div>
+                        {this.state.encounter ? <ConservationContainer encounter={this.state.encounter} selectedButton={this.selectedButton} selectedInfo={this.selectedInfo} /> : null}
+
+                        <div id='image-grid'>
+                            {this.state.encounter ? this.mapImages() : null}
+                        </div>
+                        <PhotoInput encounterPhotoHandler={this.encounterPhotoHandler} />
+                        <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
+                        <button onClick={this.deleteEncounter}>Delete this encounter</button>
                     </div>
-                        : null}
+                    {
+                        this.state.edit ?
+                            <div id='edit-form'>
+                                <div id='inner-form'>
+                                    <span onClick={() => this.setState(() => ({ edit: false }))}><AiIcons.AiOutlineClose /></span>
+                                    <SearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
+                                    <EncounterForm encounterNotesHandler={this.encounterNotesHandler} edit={this.state.edit} />
+                                </div>
+                            </div>
+                            : null
+                    }
                 </div>
-                <div id='image-grid'>
-                    {this.state.encounter ? this.mapImages() : null}
-                </div>
-                <PhotoInput encounterPhotoHandler={this.encounterPhotoHandler} />
-                <button onClick={() => this.setState(() => ({ edit: true }))}>Edit this encounter</button>
-                <button onClick={this.deleteEncounter}>Delete this encounter</button>
             </div>
         )
     }

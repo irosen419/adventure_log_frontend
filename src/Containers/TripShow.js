@@ -73,13 +73,15 @@ class TripShow extends React.Component {
 
     mapEncounters = () => {
         return this.state.encounterArray.map(encounter => {
-            return (<NavLink to={`/encounter/${encounter.id}`}>
-                <EncounterCard encounter={encounter} onClick={() => {
-                    localStorage.setItem("sci_name", encounter.animal_scientific_name)
-                    localStorage.setItem("common_name", encounter.animal_common_name)
-                    localStorage.setItem("tripId", this.state.trip.id)
-                    localStorage.setItem("tripName", this.state.trip.destination)
-                }} /></NavLink>)
+            return (
+                <NavLink to={`/encounter/${encounter.id}`}>
+                    <EncounterCard encounter={encounter} onClick={() => {
+                        localStorage.setItem("sci_name", encounter.animal_scientific_name)
+                        localStorage.setItem("common_name", encounter.animal_common_name)
+                        localStorage.setItem("tripId", this.state.trip.id)
+                        localStorage.setItem("tripName", this.state.trip.destination)
+                    }} />
+                </NavLink>)
         })
     }
 

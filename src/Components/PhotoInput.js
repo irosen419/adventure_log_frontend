@@ -20,33 +20,45 @@ class PhotoInput extends React.Component {
             fileArray.push(e.target.files[i])
             i++
         }
-        for (const file of fileArray) {
-            const fileReader = new FileReader()
-            fileReader.readAsDataURL(file)
-            fileReader.onloadend = () => {
-                this.setState(() => ({
-                    photo_URLs: [fileReader.result, ...this.state.photo_URLs]
-                }))
+        this.setState(() => ({ photo_URLs: [] }), () => {
+            for (const file of fileArray) {
+                const fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onloadend = () => {
+                    this.setState(() => ({
+                        photo_URLs: [fileReader.result, ...this.state.photo_URLs]
+                    }), () => this.setState(() => ({ photo_URLs: [] })))
+                }
             }
-        }
+        })
         console.log(fileArray)
         this.setState(() => ({
             photos: fileArray
         }))
     }
 
+    previewImages = () => {
+        return this.state.photo_URLs.map(img => <img className="image-preview" src={img} alt="Alt" />)
+    }
+
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <input id="photo-add"
-                    hidden type="file"
-                    multiple name="photos"
-                    accept="image/*"
-                    onChange={this.pictureHandler}
-                />
-                <label id="photo-add-label" for="photo-add">Click here to add photos</label>
-                <input type="submit" value="Submit Photos" />
-            </form>
+            <>
+                <div id="preview-flex">
+                    {this.state.photo_URLs ? this.previewImages() : null}
+                </div>
+                <form onSubmit={this.submitHandler}>
+                    <input id="photo-add"
+                        hidden
+                        type="file"
+                        multiple name="photos"
+                        accept="image/*"
+                        onChange={this.pictureHandler}
+                    />
+                    <label id="photo-add-label" for="photo-add">Click here to add photos</label>
+                    <input type="submit" value="Submit Photos" />
+                </form>
+            </>
         )
     }
 }

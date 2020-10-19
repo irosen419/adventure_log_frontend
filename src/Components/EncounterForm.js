@@ -58,7 +58,8 @@ class EncounterForm extends React.Component {
                 </select>
                 <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
                 <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
-                <input type="file" multiple name="photos" accept="image/*" onChange={this.pictureHandler} />
+                <input id="photos" type="file" multiple hidden name="photos" accept="image/*" onChange={this.pictureHandler} />
+                <label id="photo-add-label" for="photos">Click here to add photos</label>
                 <input type="submit" value="Submit" />
             </form>
         )
