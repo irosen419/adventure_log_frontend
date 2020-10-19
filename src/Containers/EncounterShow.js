@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import AnimalShow from '../Components/AnimalShow'
 import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
 import ConservationContainer from './ConservationContainer'
@@ -130,6 +129,8 @@ class EncounterShow extends React.Component {
                     return info.threats
                 case ('Conservation Measures'):
                     return info.conservationmeasures
+                default:
+                    return <p>Sorry. We could not find any information on this species.</p>
             }
         }
     }

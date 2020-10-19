@@ -17,7 +17,7 @@ function Navbar(props) {
     const decideUserButton = () => {
         return window.location.pathname.split('/')[1] !== 'dashboard' &&
             localStorage.getItem("userId") !== props.user.id.toString() ?
-            <li key={2} className='nav-text'>
+            <li key={3} className='nav-text'>
                 <Link to={`/dashboard/${localStorage.getItem('userId')}`}>
                     <span>Back to {localStorage.getItem("username")}'s dashboard</span>
                     <FaIcons.FaMapMarkedAlt />
@@ -28,7 +28,7 @@ function Navbar(props) {
 
     const decideTripNavButton = () => {
         return window.location.pathname.split('/')[1] === 'encounter' ?
-            <li key={3} className='nav-text'>
+            <li key={4} className='nav-text'>
                 <Link to={`/trip/${localStorage.getItem('tripId')}`}>
                     <span>{localStorage.getItem('tripName')}</span>
                     <FaIcons.FaPlane />
@@ -59,17 +59,23 @@ function Navbar(props) {
                             </Link>
                         </li>
                         <li key={1} className='nav-text'>
-                            <Link to={`/dashboard/${props.user.id}`} onClick={() => {
+                            <a href={`/dashboard/${props.user.id}`} onClick={() => {
                                 localStorage.setItem("userId", props.user.id)
                                 localStorage.setItem("username", props.user.username)
                             }}>
                                 <span>Dashboard</span>
                                 <FcIcons.FcGlobe />
+                            </a>
+                        </li>
+                        <li key={2} className='nav-text'>
+                            <Link to={'/hub'}>
+                                <span>Hub</span>
+                                <FaIcons.FaUserFriends />
                             </Link>
                         </li>
                         {decideUserButton()}
                         {decideTripNavButton()}
-                        <li key={4} className='nav-text'>
+                        <li key={5} className='nav-text'>
                             <Link to={'/login'} onClick={logout}>
                                 <span>Log out</span>
                                 <FiIcons.FiLogOut />

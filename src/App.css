@@ -113,41 +113,6 @@ span {
   color: #f5f5f5;
 }
 
-
-/* #navbar {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  width: 100vw;
-  height: 75px;
-  background-color: blue;
-}
-
-#navbar a {
-  font-size: larger;
-  margin-left: 25px;
-  background-color: brown;
-}
-
-#navbar .user-search {
-  background-color: white;
-  font-size: x-large;
-  border: 1px solid 
-}
-
-#navbar ul a {
-  margin-left: 0;
-}
-
-ul {
-  position: absolute;
-  z-index: 5;
-  list-style-type: none;
-  padding: 0;
-} */
-
-
-
 #trip-map {
   height: 50%;
   width: 45%;

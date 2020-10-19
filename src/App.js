@@ -6,6 +6,7 @@ import Login from './Components/Login'
 import Signup from './Components/Signup'
 import TripShow from './Containers/TripShow'
 import EncounterShow from './Containers/EncounterShow'
+import Hub from './Containers/Hub'
 import './App.css';
 
 
@@ -131,7 +132,7 @@ class App extends React.Component {
   }
 
   render() {
-    { this.checkForUser() }
+    this.checkForUser()
     return (
       <div id="app">
         {this.state.user ? <Navbar user={this.state.user} logout={this.logout} /> : null}
@@ -157,6 +158,7 @@ class App extends React.Component {
               : null
           }} />
           <Route path='/encounter/:id' render={() => <EncounterShow />} />
+          <Route path='/hub' render={() => <Hub user={this.state.user} followings={this.state.currentUserFollowings} />} />
         </Switch>
       </div>
     )
