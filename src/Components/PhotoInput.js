@@ -43,7 +43,7 @@ class PhotoInput extends React.Component {
 
     render() {
         return (
-            <>
+            <div id="photo-input">
                 <div id="preview-flex">
                     {this.state.photo_URLs ? this.previewImages() : null}
                 </div>
@@ -56,9 +56,9 @@ class PhotoInput extends React.Component {
                         onChange={this.pictureHandler}
                     />
                     <label id="photo-add-label" for="photo-add">Click here to add photos</label>
-                    <input type="submit" value="Submit Photos" />
+                    <input id="submit" type="submit" value="Submit Photos" />
                 </form>
-            </>
+            </div>
         )
     }
 }
