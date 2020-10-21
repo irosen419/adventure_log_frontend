@@ -37,6 +37,7 @@ class TripShow extends React.Component {
     }
 
     encounterAnimalHandler = (animal) => {
+        localStorage.setItem("sci_name", animal.scientific_name)
         this.setState(() => ({
             animalScientificName: animal.scientific_name,
             animalCommonName: animal.common_name,

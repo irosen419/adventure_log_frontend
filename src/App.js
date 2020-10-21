@@ -14,7 +14,9 @@ class App extends React.Component {
 
   state = {
     user: "",
-    currentUserFollowings: []
+    signUp: false,
+    currentUserFollowings: [],
+    followingsFetched: false
   }
 
   componentDidMount() {
@@ -72,13 +74,14 @@ class App extends React.Component {
         localStorage.setItem("username", userData.user.username)
         localStorage.setItem("userId", userData.user.id)
         this.setState(() => ({
-          user: userData.user
+          user: userData.user,
+          signUp: false
         }), () => this.props.history.push(`/dashboard/${this.state.user.id}`))
       })
   }
 
   checkForUser = () => {
-    return this.state.user && this.state.currentUserFollowings.length === 0 ? this.fetchCurrentFollowings() : null
+    return this.state.user && this.state.currentUserFollowings.length === 0 && !this.state.followingsFetched ? this.fetchCurrentFollowings() : null
   }
 
   fetchCurrentFollowings = () => {
@@ -87,7 +90,10 @@ class App extends React.Component {
       headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` }
     })
       .then(resp => resp.json())
-      .then((users) => this.setState({ currentUserFollowings: users.followings }))
+      .then((users) => this.setState({
+        currentUserFollowings: users.followings,
+        followingsFetched: true
+      }))
   }
 
   friend = (options) => {
@@ -131,15 +137,20 @@ class App extends React.Component {
     this.setState(() => ({ user: "" }))
   }
 
+  signUp = () => {
+    this.setState((previousState) => ({ signUp: !previousState.signUp }))
+  }
+
   render() {
     this.checkForUser()
     return (
       <div id="app">
         {this.state.user ? <Navbar user={this.state.user} logout={this.logout} /> : null}
+        {this.state.signUp ? <Signup signupHandler={this.signupHandler} signUp={this.signUp} /> : null}
         <Switch>
           <Route
             path='/login'
-            render={() => <Login loginHandler={this.loginHandler} />}
+            render={() => <Login loginHandler={this.loginHandler} signUp={this.signUp} />}
           />
           <Route
             path='/signup'
