@@ -145,7 +145,6 @@ class TripShow extends React.Component {
     render() {
         return (
             <div id="trip">
-
                 <div id='flex'>
                     <div id='encounters'>
                         {this.state.trip ? <h1 id="trip-show">{this.state.trip.destination} {this.state.trip.date ? `- ${this.state.trip.date}` : null}</h1> : null}
