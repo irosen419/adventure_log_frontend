@@ -22,7 +22,7 @@ class MapContainer extends React.Component {
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
 
-                return ({ id: trip.id, destination: trip.destination, latitude: lat, longitude: lng })
+                return ({ id: trip.id, destination: trip.destination, latitude: lat, longitude: lng, encounter_num: trip.my_encounters.length })
             },
             error => {
                 console.error(error);
@@ -38,11 +38,12 @@ class MapContainer extends React.Component {
 
 
     makeMarkers = () => {
+        let pluralize = require('pluralize')
         return this.state.coordinatesArray.map(coord =>
             <Marker
                 key={this.state.coordinatesArray.indexOf(coord)}
                 name={coord.destination}
-                title={coord.destination}
+                title={`Destination: ${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}`}
                 id={coord.id}
                 position={{ lat: coord.latitude, lng: coord.longitude }}
                 onClick={() => this.props.history.push(`/trip/${coord.id}`)}

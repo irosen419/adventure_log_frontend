@@ -94,7 +94,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
+                            title={`Destination: ${coord.destination}\nUsername: ${coord.username}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -109,7 +109,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
+                            title={`Destination: ${coord.destination}\nUsername: ${coord.username}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
@@ -125,7 +125,7 @@ class Hub extends React.Component {
                         <Marker
                             key={this.state.coordinatesArray.indexOf(coord)}
                             name={coord.destination}
-                            title={`${coord.destination}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}\n${coord.username}`}
+                            title={`Destination: ${coord.destination}\nUsername: ${coord.username}\n${coord.encounter_num} animal ${pluralize('encounter', coord.encounter_num)}`}
                             id={coord.id}
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
