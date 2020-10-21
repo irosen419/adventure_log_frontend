@@ -1,11 +1,11 @@
-/* a {
+ a {
   text-decoration: none;
   color: black
 }
+
 a:visited {
   color: black
 }
- */
 
 a:hover {
   cursor: pointer;
@@ -17,13 +17,30 @@ a:hover {
   margin: 0;
 }
 
-.navbar {
-  background-color: #060b26;
-  height: 80px;
+/*NAVBAR*/
+
+.navbar, #right {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+#right {
+  width: 450px;
+  margin-right: 5%;
+}
+
+#logout span {
+  width: 75px;
+}
+
+.navbar {
+  background-color: #060b26;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .search-bar {
   margin-right: 8%;
@@ -77,7 +94,7 @@ a:hover {
   height: 60px;
 }
 
-.nav-text a {
+.nav-text a, #logout a {
   text-decoration: none;
   color: #f5f5f5;
   font-size: 18px;
@@ -118,13 +135,25 @@ span {
   height: 50%;
   width: 45%;
 }
-
+/* 
 #location-info {
   position: absolute;
   text-align: center;
   right: 77.5%;
   top: 45%;
   z-index: 2;
+} */
+
+.follow-button {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7.5%;
+  height: 35px;
+
+  position: absolute;
+  bottom: 30%;
+
+  font-size: medium;
 }
 
 #trip-form {
@@ -364,8 +393,16 @@ div#grid-header button {
   width: fit-content;
   height: 100vh;
   overflow-y: hidden;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: auto;
+}
+
+#list {
+  height: 100vh;
+}
+
+#encounters-list::-webkit-scrollbar {
+  display: none;
 }
 
 /* #encounter-list {
@@ -394,6 +431,16 @@ div#grid-header button {
 }
 
 /*FORMS*/
+
+.submit {
+  width: 75%;
+  height: 35px;
+  font-size: medium;
+}
+
+button, .submit, #photo-add-label:hover {
+  cursor: pointer;
+}
 
 #edit-form {
   position: fixed;

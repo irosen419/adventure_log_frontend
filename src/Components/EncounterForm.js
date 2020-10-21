@@ -70,7 +70,7 @@ class EncounterForm extends React.Component {
                     <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
                     <input id="photos" type="file" multiple hidden name="photos" accept="image/*" onChange={this.pictureHandler} />
                     <label id="photo-add-label" for="photos">Click here to add photos</label>
-                    <input type="submit" value="Submit" />
+                    <input className="submit" type="submit" value="Submit" />
                 </form>
             </div>
         )
