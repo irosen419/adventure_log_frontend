@@ -56,7 +56,7 @@ class PhotoInput extends React.Component {
                         onChange={this.pictureHandler}
                     />
                     <label id="photo-add-label" for="photo-add">Click here to add photos</label>
-                    <input id="submit" type="submit" value="Submit Photos" />
+                    <input className="submit" type="submit" value="Submit Photos" />
                 </form>
             </div>
         )

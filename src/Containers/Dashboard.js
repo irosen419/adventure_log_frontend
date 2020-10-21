@@ -76,21 +76,17 @@ class Dashboard extends React.Component {
 
     followButton = () => {
         if (this.checkFollowing()) {
-            return <a href={`/dashboard/${this.props.user.id}`}><button onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
+            return <a href={`/dashboard/${this.props.user.id}`}><button className="follow-button" onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
         } else {
-            return <button onClick={(e) => this.props.friendHandler(e)}>Follow</button>
+            return <button className="follow-button" onClick={(e) => this.props.friendHandler(e)}>Follow</button>
         }
     }
 
     render() {
         return (
             <div id="dashboard">
-                {this.props.user.id.toString() !== window.location.pathname.split('/')[2] ? this.followButton() : null}
-                {/* <div id='followings'>
-                    <h2>{localStorage.getItem("username")} is following</h2>
-                    {this.state.followingsArray}
-                </div> */}
                 {this.state.tripsArray ? <MapContainer user={this.props.user} trips={this.state.tripsArray} /> : null}
+                {this.props.user.id.toString() !== window.location.pathname.split('/')[2] ? this.followButton() : null}
                 <TripForm tripSubmitHandler={this.tripSubmitHandler} user={this.props.user} />
                 {this.state.tripsArray.length > 0 ? <TripContainer user={this.props.user} trips={this.state.tripsArray} /> : null}
             </div>

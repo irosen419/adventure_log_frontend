@@ -21,7 +21,8 @@ class EncounterForm extends React.Component {
         this.setState(() => ({
             time_of_day: "",
             weather_conditions: "",
-            notes: ""
+            notes: "",
+            photo_URLs: []
         }))
     }
 
@@ -56,9 +57,6 @@ class EncounterForm extends React.Component {
     render() {
         return (
             <div id="encounter-form">
-                <div id="preview-flex">
-                    {this.state.photo_URLs ? this.previewImages() : null}
-                </div>
                 <form onSubmit={this.submitHandler}>
                     <select name="time_of_day" value={this.state.time_of_day} onChange={this.changeHandler}>
                         <option>Time of Day</option>
@@ -68,9 +66,12 @@ class EncounterForm extends React.Component {
                     </select>
                     <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
                     <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
+                    <div id="preview-flex">
+                        {this.state.photo_URLs ? this.previewImages() : null}
+                    </div>
                     <input id="photos" type="file" multiple hidden name="photos" accept="image/*" onChange={this.pictureHandler} />
                     <label id="photo-add-label" for="photos">Click here to add photos</label>
-                    <input type="submit" value="Submit" />
+                    <input className="submit" type="submit" value="Submit" />
                 </form>
             </div>
         )

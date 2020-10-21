@@ -1,11 +1,13 @@
-/* a {
+
+
+a {
   text-decoration: none;
   color: black
 }
+
 a:visited {
   color: black
 }
- */
 
 a:hover {
   cursor: pointer;
@@ -17,16 +19,140 @@ a:hover {
   margin: 0;
 }
 
-.navbar {
-  background-color: #060b26;
-  height: 80px;
+/*LOGIN*/
+#login-form, #login-form form {
+  display: flex;
+  flex-direction: column;
+}
+#login-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 350px;
+  width: 450px;
+
+  background-color: whitesmoke;
+  border: 2px solid;
+  border-radius: 25px
+}
+
+#login-form form {
+  margin: auto;
+  width: 75%;
+}
+
+#login-form input{
+  height: 40px;
+  margin: 10px 0 10px 0;
+}
+
+#login-form .submit {
+  width: 100%;
+}
+
+#login-form p {
+  margin: auto;
+}
+
+#signup {
+  background: none;
+  border-style: none;
+  font-size: large;
+}
+
+/*SIGNUP*/
+
+#welcome {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(160, 160, 160, 0.3);
+}
+
+#signup-form form {
+  display: flex;
+  flex-direction: column;
+}
+#signup-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 385px;
+  width: 450px;
+
+  background-color: whitesmoke;
+  border: 2px solid;
+  border-radius: 25px
+}
+
+#signup-form form {
+  margin: auto;
+  margin-top: 8%;
+  width: 75%;
+}
+
+#signup-form input{
+  height: 40px;
+  margin: 10px 0 10px 0;
+}
+
+#signup-form .submit {
+  width: 100%;
+}
+
+#signup-form span {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+
+  font-size: x-large
+}
+
+#signup-form span:hover {
+  cursor: pointer;
+}
+
+
+/*NAVBAR*/
+
+.navbar, #right {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+#right {
+  width: 450px;
+  margin-right: 5%;
+}
+
+#logout span {
+  width: 75px;
+}
+
+.navbar {
+  background-color: #060b26;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .search-bar {
   margin-right: 8%;
+
+}
+
+.search-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .search-bar input {
@@ -37,11 +163,18 @@ a:hover {
 
 .search-bar ul {
   position: absolute;
+  max-height: 275px;
   width: 275px;
   list-style: none;
   background-color: white;
   border: 1px solid;
   font-size: larger;
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+.search-bar li:hover {
+  cursor: pointer;
 }
 
 .menu-bars {
@@ -77,7 +210,7 @@ a:hover {
   height: 60px;
 }
 
-.nav-text a {
+.nav-text a, #logout a {
   text-decoration: none;
   color: #f5f5f5;
   font-size: 18px;
@@ -118,13 +251,25 @@ span {
   height: 50%;
   width: 45%;
 }
-
+/* 
 #location-info {
   position: absolute;
   text-align: center;
   right: 77.5%;
   top: 45%;
   z-index: 2;
+} */
+
+.follow-button {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7.5%;
+  height: 35px;
+
+  position: absolute;
+  bottom: 30%;
+
+  font-size: medium;
 }
 
 #trip-form {
@@ -157,23 +302,100 @@ span {
 #trip {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 #trip #flex {
+  position: absolute;
   display: flex;
+  height: 50%;
+  margin-left: 27.5%;
+  transform: translate(-50%);
 }
 
 #trip #flex #location-map div:first-child {
-  position: absolute;
   margin-left: 0;
   max-width: 45vw;
-  max-height: 25vw;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0);
 }
 
-#encounters img {
+#trip-encounter-form {
+  position: absolute;
+  top: 67.5%;
+  right: 15%;
+
+  display: flex;
+}
+
+#encounter-form, #encounter-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+#encounter-form form {
+  width: 500px;
+  font-size: larger;
+}
+#encounter-form input, #encounter-form select {
+  font-size: large;
+  height: 40px;
+}
+
+button#delete-trip {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  
+  width: 150px;
+  height: 35px;
+  font-size: medium;
+  background-color: rgb(255, 126, 126);
+}
+
+#encounters-grid {
+  margin-left: 25px;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: 200px;
+  grid-gap: 25px;
+  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+#encounters-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.encounter-card img{
+  border-radius: 15px;
+}
+
+#encounters-grid .encounter-card {
+  height: 200px;
   width: 200px;
+
+  position: relative;
+  text-align: center;
+}
+
+#encounters-grid img {
+  width:100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.encounter-card div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: larger;
+  color: rgb(255, 255, 255);
+  font-weight: 900;
+  text-shadow: 3px 2px #1a1a1a;
 }
 
 #trip #encounters h1 {
@@ -216,6 +438,7 @@ span {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 250px;
+  grid-gap: 5px;
 }
 
 
@@ -223,6 +446,65 @@ span {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  
+}
+
+/*PHOTO MODAL*/
+
+#photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+#photo-modal img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#photo-modal span {
+  position: absolute;
+  top: 35px;
+  color: #f5f5f5;
+  font-size: 48px;
+  z-index: 2;
+}
+
+#photo-modal #close {
+  right: 75px;
+}
+
+#photo-modal #close:hover {
+  cursor: pointer;
+}
+
+#photo-modal #fraction {
+  left: 75px;
+}
+
+#photo-modal button {
+  position: absolute;
+  top: 50%;
+  height: 50px;
+  width: 100px;
+  font-size: large;
+  z-index: 2;
+}
+
+#previous {
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+#next {
+  right: 10%;
+  transform: translate(50%, -50%);
 }
 
 #encounter-info {
@@ -316,7 +598,7 @@ span {
   margin-top: 2.5%;
 }
 
-div.cFtQnK, div.jzgFlE, div.egJpal, div.fyudsR, div.eTkkyF, div.imUfQn {
+div.cFtQnK, div.jzgFlE, div.egJpal, div.fyudsR, div.eTkkyF, div.imUfQm, div.hYSvbn, div.eTkkyF, div.fqeBmq {
   position: relative;
   top: 6rem;
 }
@@ -337,24 +619,27 @@ div#grid-header button {
   display: flex;
   width: fit-content;
   margin: auto;
+  
 }
 
 #preview-flex img.image-preview {
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
+  padding: 5px;
 }
 
-/* 
-#followings {
-  position: absolute;
-  top: 10%;
-  left: 2%;
-
-  z-index: 3;
-} */
-
 /*HUB*/
+
+#choose-view {
+  margin-left: 50%;
+  margin-top: 1%;
+  transform: translate(-50%);
+
+  height: 35px;
+  width: 5%;
+  font-size: medium;
+}
 
 #hub #encounters-list {
   display: grid;
@@ -362,15 +647,29 @@ div#grid-header button {
   grid-template-rows: 300px;
   grid-gap: 25px;
   width: fit-content;
-  height: 100vh;
+  max-height: 75vh;
   overflow-y: hidden;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: auto;
 }
 
-/* #encounter-list {
-  margin: auto;
-} */
+#list {
+  /* height: 100vh; */
+}
+
+#list select {
+  margin-left: 50%;
+  margin-bottom: 2.5%;
+  margin-top: 1%;
+  transform: translate(-50%);
+
+  font-size: large;
+  width: 7.5%;
+}
+
+#encounters-list::-webkit-scrollbar {
+  display: none;
+}
 
 #encounters-list .encounter-card {
   height: 300px;
@@ -384,16 +683,21 @@ div#grid-header button {
   width:100%;
   height: 100%;
   object-fit: cover;
-}
 
-#encounters-list .encounter-card div{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  
 }
 
 /*FORMS*/
+
+.submit {
+  width: 75%;
+  height: 35px;
+  font-size: medium;
+}
+
+button, .submit, #photo-add-label:hover {
+  cursor: pointer;
+}
 
 #edit-form {
   position: fixed;
@@ -402,7 +706,7 @@ div#grid-header button {
   z-index: 2;
   height: 100vh;
   width: 100vw;
-  background-color: rgb(175, 27, 27, 0.75);
+  background-color: rgba(209, 167, 167, 0.75);
 }
 
 #edit-form span {
@@ -426,7 +730,7 @@ div#grid-header button {
   border-radius: 5px;
   padding: 100px;
 
-  background-color: rgb(255, 255, 255, 1.0);
+  background-color: rgb(245, 244, 244);
 
   display: flex;
 

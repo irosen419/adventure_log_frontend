@@ -68,6 +68,7 @@ class AnimalSearchForm extends React.Component {
     render() {
         return (
             <form className="search-bar">
+                <h3>What animal did you see?</h3>
                 <input type="text" name="search" placeholder="Search..." value={this.state.search} onChange={this.changeHandler} />
                 {this.renderSuggestions()}
             </form>

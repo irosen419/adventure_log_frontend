@@ -4,6 +4,7 @@ import SearchForm from '../Components/AnimalSearchForm'
 import EncounterForm from '../Components/EncounterForm'
 import PhotoInput from '../Components/PhotoInput'
 import ConservationContainer from './ConservationContainer'
+import PhotoModal from '../Components/PhotoModal'
 import * as AiIcons from 'react-icons/ai'
 
 class EncounterShow extends React.Component {
@@ -13,7 +14,9 @@ class EncounterShow extends React.Component {
         animalInfo: "",
         animalId: "",
         edit: false,
-        selectedButton: 'Population Trend'
+        selectedButton: 'Population Trend',
+        modal: false,
+        modalNum: 0
     }
 
     componentDidMount() {
@@ -133,7 +136,17 @@ class EncounterShow extends React.Component {
 
     mapImages = () => {
         const photos = this.state.encounter.encounter_images.record.photos
-        return photos.map(img_url => <img key={photos.indexOf(img_url)} src={img_url} alt={localStorage.getItem("common_name")} />)
+        return photos.map(img_url => {
+            // console.log("Index: ", photos.indexOf(img_url))
+            return <img
+                key={photos.indexOf(img_url)}
+                src={img_url}
+                alt={localStorage.getItem("common_name")}
+                onClick={() =>
+                    this.showModal(photos.indexOf(img_url))
+                }
+            />
+        })
     }
 
     selectedButton = (e) => {
@@ -163,10 +176,29 @@ class EncounterShow extends React.Component {
         }
     }
 
+    showModal = (index) => {
+        this.setState(() => ({
+            modal: true,
+            modalNum: index
+        }))
+    }
+
+    closeModal = () => {
+        this.setState(() => ({ modal: false }))
+    }
+
     render() {
-        console.log(this.state.encounter)
+        console.log("Modal: ", this.state.modal, "Num: ", this.state.modalNum)
         return (
             <div id='encounter-main'>
+                {
+                    this.state.modal ?
+                        <PhotoModal
+                            photos={this.state.encounter.encounter_images.record.photos}
+                            initialIndex={this.state.modalNum}
+                            closeModal={this.closeModal} />
+                        : null
+                }
                 <div id="inner-encounter">
                     <div id='encounter-info'>
                         <div id="encounter-flex">

@@ -42,14 +42,25 @@ function Navbar(props) {
         props.logout()
     }
 
+
     return (
         <>
             <IconContext.Provider value={{ color: '#fff' }}>
                 <div className='navbar'>
-                    <Link to="#" className="menu-bars">
-                        <FaIcons.FaBars onClick={() => showSidebar()} />
-                    </Link>
-                    <UserSearchForm />
+                    <div id="left">
+                        <Link to="#" className="menu-bars">
+                            <FaIcons.FaBars onClick={() => showSidebar()} />
+                        </Link>
+                    </div>
+                    <div id="right">
+                        <UserSearchForm />
+                        <div id="logout">
+                            <Link to={'/login'} onClick={logout}>
+                                <span>Log out</span>
+                                <FiIcons.FiLogOut />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={() => showSidebar()}>
@@ -75,12 +86,6 @@ function Navbar(props) {
                         </li>
                         {decideUserButton()}
                         {decideTripNavButton()}
-                        <li key={5} className='nav-text'>
-                            <Link to={'/login'} onClick={logout}>
-                                <span>Log out</span>
-                                <FiIcons.FiLogOut />
-                            </Link>
-                        </li>
                     </ul>
                 </nav>
             </IconContext.Provider>
