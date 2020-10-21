@@ -33,35 +33,46 @@ class EncounterForm extends React.Component {
             fileArray.push(e.target.files[i])
             i++
         }
-        for (const file of fileArray) {
-            const fileReader = new FileReader()
-            fileReader.readAsDataURL(file)
-            fileReader.onloadend = () => {
-                this.setState(() => ({
-                    photo_URLs: [fileReader.result, ...this.state.photo_URLs]
-                }))
+        this.setState(() => ({ photo_URLs: [] }), () => {
+            for (const file of fileArray) {
+                const fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onloadend = () => {
+                    this.setState(() => ({
+                        photo_URLs: [fileReader.result, ...this.state.photo_URLs]
+                    }))
+                }
             }
-        }
+        })
         this.setState(() => ({
             photos: fileArray
         }))
     }
 
+    previewImages = () => {
+        return this.state.photo_URLs.map(img => <img className="image-preview" src={img} alt="Alt" />)
+    }
+
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <select name="time_of_day" value={this.state.time_of_day} onChange={this.changeHandler}>
-                    <option>Time of Day</option>
-                    <option>Morning</option>
-                    <option>Afternoon</option>
-                    <option>Evening</option>
-                </select>
-                <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
-                <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
-                <input id="photos" type="file" multiple hidden name="photos" accept="image/*" onChange={this.pictureHandler} />
-                <label id="photo-add-label" for="photos">Click here to add photos</label>
-                <input type="submit" value="Submit" />
-            </form>
+            <div id="encounter-form">
+                <div id="preview-flex">
+                    {this.state.photo_URLs ? this.previewImages() : null}
+                </div>
+                <form onSubmit={this.submitHandler}>
+                    <select name="time_of_day" value={this.state.time_of_day} onChange={this.changeHandler}>
+                        <option>Time of Day</option>
+                        <option>Morning</option>
+                        <option>Afternoon</option>
+                        <option>Evening</option>
+                    </select>
+                    <input type="text" name="weather_conditions" placeholder="Describe the weather" value={this.state.weather_conditions} onChange={this.changeHandler} />
+                    <input type="textarea" name="notes" placeholder="Describe the encounter" value={this.state.notes} onChange={this.changeHandler} />
+                    <input id="photos" type="file" multiple hidden name="photos" accept="image/*" onChange={this.pictureHandler} />
+                    <label id="photo-add-label" for="photos">Click here to add photos</label>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
         )
     }
 }
