@@ -19,14 +19,16 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div id="welcome">
+            <div id="login">
                 <div id="login-form">
                     <form onSubmit={this.submitHandler}>
-                        <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.changeHandler} />
-                        <input type="text" name="password" placeholder="Password" value={this.state.password} onChange={this.changeHandler} />
-                        <input type="submit" value="Log In" />
+                        <label>Username:</label>
+                        <input type="text" name="username" value={this.state.username} onChange={this.changeHandler} />
+                        <label>Password:</label>
+                        <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} />
+                        <input className="submit" type="submit" value="Log In" />
                     </form>
-                    <p>Not a user? <button onClick={this.props.signUp}>Sign up!</button></p>
+                    <p>Not a user? <button id="signup" onClick={this.props.signUp}>Sign up!</button></p>
                 </div>
             </div>
         )

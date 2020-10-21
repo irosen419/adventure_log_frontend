@@ -17,6 +17,108 @@ a:hover {
   margin: 0;
 }
 
+/*LOGIN*/
+#login-form, #login-form form {
+  display: flex;
+  flex-direction: column;
+}
+#login-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 350px;
+  width: 450px;
+
+  background-color: whitesmoke;
+  border: 2px solid;
+  border-radius: 25px
+}
+
+#login-form form {
+  margin: auto;
+  width: 75%;
+}
+
+#login-form input{
+  height: 40px;
+  margin: 10px 0 10px 0;
+}
+
+#login-form .submit {
+  width: 100%;
+}
+
+#login-form p {
+  margin: auto;
+}
+
+#signup {
+  background: none;
+  border-style: none;
+  font-size: large;
+}
+
+/*SIGNUP*/
+
+#welcome {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(160, 160, 160, 0.3);
+}
+
+#signup-form form {
+  display: flex;
+  flex-direction: column;
+}
+#signup-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 385px;
+  width: 450px;
+
+  background-color: whitesmoke;
+  border: 2px solid;
+  border-radius: 25px
+}
+
+#signup-form form {
+  margin: auto;
+  margin-top: 8%;
+  width: 75%;
+}
+
+#signup-form input{
+  height: 40px;
+  margin: 10px 0 10px 0;
+}
+
+#signup-form .submit {
+  width: 100%;
+}
+
+#signup-form span {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+
+  font-size: x-large
+}
+
+#signup-form span:hover {
+  cursor: pointer;
+}
+
+
 /*NAVBAR*/
 
 .navbar, #right {
