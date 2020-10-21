@@ -135,7 +135,7 @@ class TripShow extends React.Component {
 
     renderForm = () => {
         return (
-            <div>
+            <div id="trip-encounter-form">
                 <AnimalSearchForm encounterAnimalHandler={this.encounterAnimalHandler} />
                 <EncounterForm encounterNotesHandler={this.encounterNotesHandler} />
             </div>
@@ -148,10 +148,10 @@ class TripShow extends React.Component {
 
                 <div id='flex'>
                     <div id='encounters'>
-                        {this.props.user.id.toString() === localStorage.getItem("userId") ? this.renderForm() : null}
                         {this.state.trip ? <h1 id="trip-show">{this.state.trip.destination} {this.state.trip.date ? `- ${this.state.trip.date}` : null}</h1> : null}
-                        {this.state.encounterArray ? this.mapEncounters() : <h3>Loading this trip's encounters...</h3>}
-                        <button onClick={this.deleteTrip}>Delete Trip</button>
+                        <div id="encounters-grid">
+                            {this.state.encounterArray ? this.mapEncounters() : <h3>Loading this trip's encounters...</h3>}
+                        </div>
                     </div>
                     <div id='location-map'>
                         {this.state.tripLocation ?
@@ -171,6 +171,8 @@ class TripShow extends React.Component {
                         }
                     </div>
                 </div>
+                {this.props.user.id.toString() === localStorage.getItem("userId") ? this.renderForm() : null}
+                {this.props.user.id.toString() === localStorage.getItem("userId") ? <button id="delete-trip" onClick={this.deleteTrip}>Delete Trip</button> : null}
             </div>
         )
     }
