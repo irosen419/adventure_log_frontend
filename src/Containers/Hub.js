@@ -213,7 +213,7 @@ class Hub extends React.Component {
         return (
             <div id='hub' >
                 { this.state.allTripsArray ?
-                    <button onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
+                    <button id="choose-view" onClick={() => this.setState((previousState) => ({ mapOrList: !previousState.mapOrList }))}>
                         {this.state.mapOrList ? 'List View' : 'Map View'}
                     </button>
                     : null

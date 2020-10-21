@@ -385,6 +385,16 @@ div#grid-header button {
 
 /*HUB*/
 
+#choose-view {
+  margin-left: 50%;
+  margin-top: 1%;
+  transform: translate(-50%);
+
+  height: 35px;
+  width: 5%;
+  font-size: medium;
+}
+
 #hub #encounters-list {
   display: grid;
   grid-template-columns: repeat(4, 300px);
@@ -401,13 +411,19 @@ div#grid-header button {
   height: 100vh;
 }
 
+#list select {
+  margin-left: 50%;
+  margin-bottom: 2.5%;
+  margin-top: 1%;
+  transform: translate(-50%);
+
+  font-size: large;
+  width: 7.5%;
+}
+
 #encounters-list::-webkit-scrollbar {
   display: none;
 }
-
-/* #encounter-list {
-  margin: auto;
-} */
 
 #encounters-list .encounter-card {
   height: 300px;
@@ -428,6 +444,10 @@ div#grid-header button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: larger;
+  color: rgb(255, 255, 255);
+  font-weight: 900;
+  text-shadow: 3px 2px #1a1a1a;
 }
 
 /*FORMS*/
