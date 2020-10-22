@@ -54,7 +54,7 @@ class MapContainer extends React.Component {
 
     mapStyles = () => {
         return {
-            height: '50%',
+            height: '60%',
             width: '45%',
             margin: 'auto',
             marginTop: '25px',
