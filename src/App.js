@@ -30,7 +30,7 @@ class App extends React.Component {
         .then(userData => {
           this.setState(() => ({
             user: userData.user
-          }))
+          }), () => this.props.history.push(`/dashboard/${this.state.user.id}`))
         })
     } else {
       this.props.history.push('/login')
