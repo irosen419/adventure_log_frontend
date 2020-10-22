@@ -42,7 +42,7 @@ class TripForm extends React.Component {
                             <option value="North America">North America</option>
                             <option value="South America">South America</option>
                             <option value="Europe">Europe</option>
-                            <option value="Australia">Austrlia</option>
+                            <option value="Australia">Australia</option>
                             <option value="Africa">Africa</option>
                             <option value="Asia">Asia</option>
                             <option value="Antarctica">Antarctica</option>
