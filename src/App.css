@@ -22,11 +22,14 @@ a:hover {
 /*LOGIN*/
 
 #login {
-  text-align: center;
+  /* text-align: center; */
 }
 
 #login h1 {
+  position: absolute;
   margin-top: 5%;
+  margin-left: 50%;
+  transform: translate(-50%);
   font-size: 64px;
 }
 
