@@ -6,6 +6,7 @@ import * as AiIcons from 'react-icons/ai'
 import * as FiIcons from 'react-icons/fi'
 import { IconContext } from 'react-icons'
 import UserSearchForm from './UserSearchForm'
+import Logo from '../images/logo.png'
 
 function Navbar(props) {
     const [sidebar, setSidebar] = useState(false)
@@ -52,6 +53,12 @@ function Navbar(props) {
                             <FaIcons.FaBars onClick={() => showSidebar()} />
                         </Link>
                     </div>
+                    <a id="logo" href={`/dashboard/${props.user.id}`} onClick={() => {
+                        localStorage.setItem("userId", props.user.id)
+                        localStorage.setItem("username", props.user.username)
+                    }}>
+                        <img src={Logo} alt="logo" />
+                    </a>
                     <div id="right">
                         <UserSearchForm />
                         <div id="logout">

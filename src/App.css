@@ -142,6 +142,16 @@ a:hover {
 
 /*NAVBAR*/
 
+.navbar a#logo {
+  position: absolute;
+  margin-left: 17rem;
+  transform: translate(-50%);
+}
+
+.navbar img {
+  height: 70px;
+}
+
 .navbar, #right {
   display: flex;
   justify-content: space-between;
