@@ -21,7 +21,6 @@ class Login extends React.Component {
     render() {
         return (
             <div id="login">
-                <h1>Adventure Log</h1>
                 <img src={Airplane} alt="Airplane Logo" />
                 <div id="login-form">
                     <form onSubmit={this.submitHandler}>
