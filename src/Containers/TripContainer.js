@@ -54,7 +54,7 @@ function TripContainer(props) {
             if (continentArrays()[continent].length > 0) {
                 arrayOfContinents.push(
                     <div className="continent" key={continent}>
-                        <h2>{continent}</h2>
+                        <h1>{continent}</h1>
                         {mapTrips(continentArrays()[continent])}
                     </div>
                 )
