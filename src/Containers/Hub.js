@@ -176,7 +176,7 @@ class Hub extends React.Component {
 
     mapStyles = () => {
         return {
-            height: '70%',
+            height: '80%',
             width: '65%',
             margin: 'auto',
             marginTop: '4rem',
@@ -188,7 +188,7 @@ class Hub extends React.Component {
             <div id="map">
                 <Map
                     google={this.props.google}
-                    zoom={1.5}
+                    zoom={2.25}
                     style={this.mapStyles()}
                     initialCenter={{ lat: 20, lng: 12 }}
                     mapType={window.google.maps.MapTypeId.SATELLITE}

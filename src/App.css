@@ -19,15 +19,15 @@ a:hover {
   margin: 0;
 }
 
-/*LOGIN*/
-
-#login {
-  /* text-align: center; */
+input, select {
+  border-radius: 5px;
 }
+
+/*LOGIN*/
 
 #login h1 {
   position: absolute;
-  margin-top: 5%;
+  margin-top: 4.5%;
   margin-left: 50%;
   transform: translate(-50%);
   font-size: 64px;
@@ -39,10 +39,9 @@ a:hover {
   position: absolute;
   z-index: -1;
   top: 7%;
-  left: 36%;
+  left: 38%;
   -webkit-transform: rotate(10deg)
 }
-
 
 #login-form, #login-form form {
   display: flex;
@@ -146,6 +145,16 @@ a:hover {
 
 
 /*NAVBAR*/
+
+.navbar a#logo {
+  position: absolute;
+  margin-left: 17rem;
+  transform: translate(-50%);
+}
+
+.navbar img {
+  height: 70px;
+}
 
 .navbar, #right {
   display: flex;
@@ -275,14 +284,12 @@ span {
   height: 50%;
   width: 45%;
 }
-/* 
-#location-info {
-  position: absolute;
-  text-align: center;
-  right: 77.5%;
-  top: 45%;
-  z-index: 2;
-} */
+
+/*DASHBOARD*/
+
+#trip-map div:first-child {
+  max-height: 85vh;
+}
 
 .follow-button {
   left: 50%;
@@ -297,16 +304,35 @@ span {
 }
 
 #trip-form {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-
+  width: fit-content;
   position: absolute;
+  left: 50%;
   bottom: 30%;
+  transform: translate(-50%);
+}
+
+#trip-form input {
+  padding-left: 10px;
+}
+#trip-form select {
+  padding-right: 10px;
+}
+
+#trip-form input, #trip-form select {
+  font-size: large;
+  margin: 10px;
+  height: 35px;
+}
+
+#trip-form #submit {
+  width: 100px;
+  padding: 0;
 }
 
 #trip-form button {
-  font-size: large;
+  width: 125px;
+  height: 40px;
+  font-size: larger;
 }
 
 #trip-container {
@@ -321,7 +347,13 @@ span {
 #trip-container div {
   text-align: center;
   margin: 10px;
+  font-size: 28px;
 }
+#trip-container h1 {
+  font-size: 40px;
+}
+
+/*TRIP SHOW*/
 
 #trip {
   display: flex;
@@ -542,6 +574,7 @@ button#delete-trip {
 #encounter-info #notes div {
   font-size: 24px;
   margin-bottom: 10px;
+  width: 85%;
 }
 
 #encounter-flex {
@@ -663,6 +696,10 @@ div#grid-header button {
   height: 35px;
   width: 5%;
   font-size: medium;
+}
+
+#hub #map div:first-child {
+  max-height: 85vh;
 }
 
 #hub #encounters-list {

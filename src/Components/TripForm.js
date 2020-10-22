@@ -47,7 +47,7 @@ class TripForm extends React.Component {
                             <option value="Asia">Asia</option>
                             <option value="Antarctica">Antarctica</option>
                         </select>
-                        <input type="submit" vakue="Submit Trip" />
+                        <input id="submit" type="submit" vakue="Submit Trip" />
                     </form>
                     : null
                 }
