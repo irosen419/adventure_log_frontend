@@ -30,7 +30,7 @@ class Hub extends React.Component {
                 'Accepts': 'application/json',
             }
         }
-        fetch(`http://localhost:3000/api/v1/trips`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/trips`, options)
             .then(resp => resp.json())
             .then(trips => this.setState(() => ({
                 allTripsArray: trips.trips,

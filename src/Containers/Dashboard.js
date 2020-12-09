@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
 
         this.fetchFollowings()
 
-        fetch(`http://localhost:3000/api/v1/users/${userId}/trips`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/users/${userId}/trips`, options)
             .then(resp => resp.json())
             .then(trips => this.setState(() => ({ tripsArray: trips })))
     }
@@ -49,14 +49,14 @@ class Dashboard extends React.Component {
             body: JSON.stringify({ trip: tripObj })
         }
 
-        fetch('http://localhost:3000/api/v1/trips', options)
+        fetch('https://fast-refuge-38524.herokuapp.com/api/v1/trips', options)
             .then(resp => resp.json())
             .then(trip => this.setState((previousState) => ({ tripsArray: [...previousState.tripsArray, trip.trip] })))
     }
 
     fetchFollowings = () => {
         const userId = window.location.pathname.split('/')[2]
-        fetch(`http://localhost:3000/api/v1/users/${userId}/followings`, {
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/users/${userId}/followings`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` }
         })

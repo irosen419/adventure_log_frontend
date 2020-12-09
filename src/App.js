@@ -22,7 +22,7 @@ class App extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('https://fast-refuge-38524.herokuapp.com/api/v1/profile', {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -46,7 +46,7 @@ class App extends React.Component {
       },
       body: JSON.stringify({ user: userInfo })
     }
-    fetch('http://localhost:3000/api/v1/login', configObj)
+    fetch('https://fast-refuge-38524.herokuapp.com/api/v1/login', configObj)
       .then(resp => resp.json())
       .then(userData => {
         localStorage.setItem("token", userData.jwt);
@@ -67,7 +67,7 @@ class App extends React.Component {
       },
       body: JSON.stringify({ user: userInfo })
     }
-    fetch('http://localhost:3000/api/v1/users', configObj)
+    fetch('https://fast-refuge-38524.herokuapp.com/api/v1/users', configObj)
       .then(resp => resp.json())
       .then(userData => {
         localStorage.setItem("token", userData.jwt);
@@ -85,7 +85,7 @@ class App extends React.Component {
   }
 
   fetchCurrentFollowings = () => {
-    fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}/followings`, {
+    fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/users/${this.state.user.id}/followings`, {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` }
     })
@@ -97,7 +97,7 @@ class App extends React.Component {
   }
 
   friend = (options) => {
-    fetch(`http://localhost:3000/api/v1/friendship`, options)
+    fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/friendship`, options)
       .then(resp => resp.json())
       .then((user) => this.setState((previousState) => ({ currentUserFollowings: [...previousState.currentUserFollowings, user.user] })))
   }
@@ -106,7 +106,7 @@ class App extends React.Component {
     console.log('unfriend')
     localStorage.setItem("userId", this.state.user.id)
     localStorage.setItem("username", this.state.user.username)
-    fetch(`http://localhost:3000/api/v1/unfriend`, options)
+    fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/unfriend`, options)
       .then(resp => resp.json())
       .then(() => {
         let newArray = this.state.currentUserFollowings

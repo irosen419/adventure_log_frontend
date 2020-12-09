@@ -23,7 +23,7 @@ class AnimalSearchForm extends React.Component {
             }
         }
 
-        fetch('http://localhost:3000/api/v1/animals', configObj)
+        fetch('https://fast-refuge-38524.herokuapp.com/api/v1/animals', configObj)
             .then(resp => resp.json())
             .then(animals => this.setState(() => ({ animalsArray: animals })))
     }

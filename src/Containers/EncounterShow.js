@@ -28,7 +28,7 @@ class EncounterShow extends React.Component {
         }
         this.fetchAnimalInfo()
 
-        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}`, options)
             .then(resp => resp.json())
             .then(encounterObj => this.setState(() => ({ encounter: encounterObj.encounter })))
     }
@@ -51,7 +51,7 @@ class EncounterShow extends React.Component {
             }
         }
 
-        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}`, options)
             .then(resp => resp.json())
             .then((data) => {
                 if (data.success) {
@@ -93,7 +93,7 @@ class EncounterShow extends React.Component {
             body: formData
         }
 
-        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}`, options)
             .then(resp => resp.json())
             .then((encounter) => {
                 console.log("ENCOUNTER", encounter)
@@ -124,7 +124,7 @@ class EncounterShow extends React.Component {
         }
         console.log("Photos: ", photos)
 
-        fetch(`http://localhost:3000/api/v1/encounters/${encounterId}/photos`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}/photos`, options)
             .then(resp => resp.json())
             .then((encounter) => {
                 console.log("ENCOUNTER", encounter)

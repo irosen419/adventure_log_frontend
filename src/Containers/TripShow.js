@@ -26,12 +26,12 @@ class TripShow extends React.Component {
             headers: { Authorization: `Bearer ${token}` }
         }
 
-        fetch(`http://localhost:3000/api/v1/trips/${tripId}`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/trips/${tripId}`, options)
             .then(resp => resp.json())
             .then(tripObj => this.setState(() => ({ trip: tripObj.trip }), () => this.geocode(this.state.trip)))
 
 
-        fetch(`http://localhost:3000/api/v1/trips/${tripId}/encounters`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/trips/${tripId}/encounters`, options)
             .then(resp => resp.json())
             .then(encounters => this.setState(() => ({ encounterArray: encounters })))
     }
@@ -66,7 +66,7 @@ class TripShow extends React.Component {
             body: formData
         }
 
-        fetch('http://localhost:3000/api/v1/encounters', options)
+        fetch('https://fast-refuge-38524.herokuapp.com/api/v1/encounters', options)
             .then(resp => resp.json())
             .then(encounter => this.setState((previousState) => ({ encounterArray: [...previousState.encounterArray, encounter.encounter] })))
         //encounter => this.setState((previousState) => ({ encounterArray: [...previousState.encounterArray, encounter.encounter] }))
@@ -97,7 +97,7 @@ class TripShow extends React.Component {
             }
         }
 
-        fetch(`http://localhost:3000/api/v1/trips/${tripId}`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/trips/${tripId}`, options)
             .then(resp => resp.json())
             .then((data) => {
                 if (data.success) {

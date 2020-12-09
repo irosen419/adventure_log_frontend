@@ -23,7 +23,7 @@ class UserSearchForm extends React.Component {
             }
         }
 
-        fetch('http://localhost:3000/api/v1/users', configObj)
+        fetch('https://fast-refuge-38524.herokuapp.com/api/v1/users', configObj)
             .then(resp => resp.json())
             .then(users => this.setState(() => ({ usersArray: users.users })))
     }
