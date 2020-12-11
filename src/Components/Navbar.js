@@ -77,13 +77,13 @@ function Navbar(props) {
                             </Link>
                         </li>
                         <li key={1} className='nav-text'>
-                            <a href={`/dashboard/${props.user.id}`} onClick={() => {
+                            <Link to={`/dashboard/${props.user.id}`} onClick={() => {
                                 localStorage.setItem("userId", props.user.id)
                                 localStorage.setItem("username", props.user.username)
                             }}>
                                 <span>Dashboard</span>
                                 <FcIcons.FcGlobe />
-                            </a>
+                            </Link>
                         </li>
                         <li key={2} className='nav-text'>
                             <Link to={'/hub'}>
