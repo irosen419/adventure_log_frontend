@@ -31,8 +31,11 @@ class MapContainer extends React.Component {
     }
 
     mapTrips = (tripsArray) => {
-        for (const trip of tripsArray) {
-            this.geocode(trip).then((coords) => this.setState((previousState) => ({ coordinatesArray: [...previousState.coordinatesArray, coords] })))
+        if (tripsArray[0]) {
+            for (const trip of tripsArray) {
+                console.log(trip)
+                this.geocode(trip).then((coords) => this.setState((previousState) => ({ coordinatesArray: [...previousState.coordinatesArray, coords] }))).then(() => console.log(this.state.coordinatesArray))
+            }
         }
     }
 

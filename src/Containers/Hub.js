@@ -30,7 +30,7 @@ class Hub extends React.Component {
                 'Accepts': 'application/json',
             }
         }
-        fetch(`http://localhost:3000/api/v1/trips`, options)
+        fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/trips`, options)
             .then(resp => resp.json())
             .then(trips => this.setState(() => ({
                 allTripsArray: trips.trips,
@@ -130,6 +130,7 @@ class Hub extends React.Component {
                             position={{ lat: coord.latitude, lng: coord.longitude }}
                             onClick={() => {
                                 localStorage.setItem("userId", coord.user_id)
+                                localStorage.setItem("username", coord.username)
                                 this.props.history.push(`/trip/${coord.id}`)
                             }}
                             icon={{ url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" }}

@@ -34,13 +34,12 @@ input, select {
 }
 
 #login img {
-  width: 300px;
+  width: 500px;
   height: 175px;
   position: absolute;
   z-index: -1;
   top: 7%;
-  left: 38%;
-  -webkit-transform: rotate(10deg)
+  left: 36%;
 }
 
 #login-form, #login-form form {
@@ -58,7 +57,9 @@ input, select {
 
   background-color: whitesmoke;
   border: 2px solid;
-  border-radius: 25px
+  border-radius: 25px;
+
+  font-size: 20px;
 }
 
 #login-form form {
@@ -69,6 +70,7 @@ input, select {
 #login-form input{
   height: 40px;
   margin: 10px 0 10px 0;
+  font-size: 20px;
 }
 
 #login-form .submit {
@@ -82,7 +84,7 @@ input, select {
 #signup {
   background: none;
   border-style: none;
-  font-size: large;
+  font-size: x-large;
 }
 
 /*SIGNUP*/
@@ -113,7 +115,8 @@ input, select {
 
   background-color: whitesmoke;
   border: 2px solid;
-  border-radius: 25px
+  border-radius: 25px;
+  font-size: 20px;
 }
 
 #signup-form form {
@@ -125,6 +128,7 @@ input, select {
 #signup-form input{
   height: 40px;
   margin: 10px 0 10px 0;
+  font-size: 20px;
 }
 
 #signup-form .submit {
@@ -332,6 +336,7 @@ span {
 #trip-form button {
   width: 125px;
   height: 40px;
+  margin-bottom: 15px;
   font-size: larger;
 }
 
