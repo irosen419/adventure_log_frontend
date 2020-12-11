@@ -101,7 +101,7 @@ class TripShow extends React.Component {
             .then(resp => resp.json())
             .then((data) => {
                 if (data.success) {
-                    this.props.history.push('/dashboard')
+                    this.props.history.push(`/dashboard/${this.state.trip.user_id}`)
                 } else {
                     console.log(data.error)
                 }

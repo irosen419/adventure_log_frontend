@@ -55,7 +55,7 @@ class App extends React.Component {
         this.setState(() => ({
           user: userData.user
         }), () => this.props.history.push(`/dashboard/${this.state.user.id}`))
-      })
+      }).catch(console.log)
   }
 
   signupHandler = (userInfo) => {

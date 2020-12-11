@@ -135,7 +135,7 @@ class EncounterShow extends React.Component {
     }
 
     mapImages = () => {
-        const photos = this.state.encounter.encounter_images.record.photos
+        const photos = this.state.encounter.photos
         return photos.map(img_url => {
             // console.log("Index: ", photos.indexOf(img_url))
             return <img
@@ -194,7 +194,7 @@ class EncounterShow extends React.Component {
                 {
                     this.state.modal ?
                         <PhotoModal
-                            photos={this.state.encounter.encounter_images.record.photos}
+                            photos={this.state.encounter.photos}
                             initialIndex={this.state.modalNum}
                             closeModal={this.closeModal} />
                         : null
