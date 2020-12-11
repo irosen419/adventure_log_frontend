@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
 
     followButton = () => {
         if (this.checkFollowing()) {
-            return <a href={`/dashboard/${this.props.user.id}`}><button className="follow-button" onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></a>
+            return <Link to={`/dashboard/${this.props.user.id}`}><button className="follow-button" onClick={(e) => this.props.friendHandler(e)}>Unfollow</button></Link>
         } else {
             return <button className="follow-button" onClick={(e) => this.props.friendHandler(e)}>Follow</button>
         }

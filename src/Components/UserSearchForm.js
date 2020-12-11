@@ -42,10 +42,10 @@ class UserSearchForm extends React.Component {
 
 
     mapUsers = () => {
-        return this.state.suggestions.map(user => <a key={user.id} href={`/dashboard/${user.id}`}><li className="user-search" onClick={() => {
+        return this.state.suggestions.map(user => <Link key={user.id} to={`/dashboard/${user.id}`}><li className="user-search" onClick={() => {
             localStorage.setItem("username", user.username)
             localStorage.setItem("userId", user.id)
-        }}>{user.username}</li></a>)
+        }}>{user.username}</li></Link>)
     }
 
     renderSuggestions = () => {
