@@ -2,6 +2,7 @@ import React from 'react'
 import MapContainer from './MapContainer'
 import TripForm from '../Components/TripForm'
 import TripContainer from './TripContainer'
+import { Link, withRouter } from 'react-router-dom'
 
 
 class Dashboard extends React.Component {
@@ -94,4 +95,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard
+export default withRouter(Dashboard)
