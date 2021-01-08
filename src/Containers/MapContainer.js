@@ -21,7 +21,6 @@ class MapContainer extends React.Component {
         return Geocode.fromAddress(trip.destination).then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
-
                 return ({ id: trip.id, destination: trip.destination, latitude: lat, longitude: lng, encounter_num: trip.my_encounters.length })
             },
             error => {
@@ -33,7 +32,6 @@ class MapContainer extends React.Component {
     mapTrips = (tripsArray) => {
         if (tripsArray[0]) {
             for (const trip of tripsArray) {
-                console.log(trip)
                 this.geocode(trip).then((coords) => this.setState((previousState) => ({ coordinatesArray: [...previousState.coordinatesArray, coords] }))).then(() => console.log(this.state.coordinatesArray))
             }
         }

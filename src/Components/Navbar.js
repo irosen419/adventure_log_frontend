@@ -53,12 +53,12 @@ function Navbar(props) {
                             <FaIcons.FaBars onClick={() => showSidebar()} />
                         </Link>
                     </div>
-                    <Link id="logo" to={`/dashboard/${props.user.id}`} onClick={() => {
+                    <a id="logo" href={`/dashboard/${props.user.id}`} onClick={() => {
                         localStorage.setItem("userId", props.user.id)
                         localStorage.setItem("username", props.user.username)
                     }}>
                         <img src={Logo} alt="logo" />
-                    </Link>
+                    </a>
                     <div id="right">
                         <UserSearchForm />
                         <div id="logout">
@@ -77,13 +77,13 @@ function Navbar(props) {
                             </Link>
                         </li>
                         <li key={1} className='nav-text'>
-                            <Link to={`/dashboard/${props.user.id}`} onClick={() => {
+                            <a href={`/dashboard/${props.user.id}`} onClick={() => {
                                 localStorage.setItem("userId", props.user.id)
                                 localStorage.setItem("username", props.user.username)
                             }}>
                                 <span>Dashboard</span>
                                 <FcIcons.FcGlobe />
-                            </Link>
+                            </a>
                         </li>
                         <li key={2} className='nav-text'>
                             <Link to={'/hub'}>

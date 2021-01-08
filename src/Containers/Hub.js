@@ -149,16 +149,12 @@ class Hub extends React.Component {
         let followingsTripsIds = this.props.followings.map(following => following.id)
         switch (this.state.filterType) {
             case ("All Adventures"):
-                console.log("there")
                 filteredArray = this.state.allTripsArray
                 break
             case ("Friends' Adventures"):
-                console.log("here")
-                console.log(this.state.filterType)
                 filteredArray = this.state.allTripsArray.filter(trip => followingsTripsIds.includes(trip.user_id))
                 break
             case ("My Adventures"):
-                console.log("poop")
                 filteredArray = this.state.allTripsArray.filter(trip => trip.user_id === this.props.user.id)
                 break
             default:

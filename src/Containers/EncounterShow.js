@@ -96,7 +96,6 @@ class EncounterShow extends React.Component {
         fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}`, options)
             .then(resp => resp.json())
             .then((encounter) => {
-                console.log("ENCOUNTER", encounter)
                 this.setState(() => ({
                     encounter: encounter.encounter,
                     edit: false
@@ -122,12 +121,10 @@ class EncounterShow extends React.Component {
             },
             body: formData
         }
-        console.log("Photos: ", photos)
 
         fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/encounters/${encounterId}/photos`, options)
             .then(resp => resp.json())
             .then((encounter) => {
-                console.log("ENCOUNTER", encounter)
                 this.setState(() => ({
                     encounter: encounter.encounter
                 }), () => this.fetchAnimalInfo())
@@ -137,7 +134,6 @@ class EncounterShow extends React.Component {
     mapImages = () => {
         const photos = this.state.encounter.photos
         return photos.map(img_url => {
-            // console.log("Index: ", photos.indexOf(img_url))
             return <img
                 key={photos.indexOf(img_url)}
                 src={img_url}
@@ -188,7 +184,6 @@ class EncounterShow extends React.Component {
     }
 
     render() {
-        console.log("Modal: ", this.state.modal, "Num: ", this.state.modalNum)
         return (
             <div id='encounter-main'>
                 {

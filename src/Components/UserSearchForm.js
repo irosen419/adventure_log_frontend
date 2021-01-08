@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class UserSearchForm extends React.Component {
 
@@ -45,7 +45,7 @@ class UserSearchForm extends React.Component {
         return this.state.suggestions.map(user => <li className="user-search" onClick={() => {
             localStorage.setItem("username", user.username)
             localStorage.setItem("userId", user.id)
-        }}><NavLink key={user.id} to={`/dashboard/${user.id}`}>{user.username}</NavLink></li>)
+        }}><a key={user.id} href={`/dashboard/${user.id}`}>{user.username}</a></li>)
     }
 
     renderSuggestions = () => {

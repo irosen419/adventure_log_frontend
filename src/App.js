@@ -103,7 +103,6 @@ class App extends React.Component {
   }
 
   unfriend = (options, followingId) => {
-    console.log('unfriend')
     localStorage.setItem("userId", this.state.user.id)
     localStorage.setItem("username", this.state.user.username)
     fetch(`https://fast-refuge-38524.herokuapp.com/api/v1/unfriend`, options)
